@@ -1,0 +1,34 @@
+{
+  "name": "sharetary",
+  "description": "Archives any topic about a technical conference and provides a cross-origin timeline view in real time.",
+  "version": "0.1",
+  "author": "ClearCode Inc.<info@clear-code.com>",
+  "contributors": [
+    {
+      "name": "YUKI Hiroshi",
+      "email": "yuki@clear-code.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/clear-code/sharetary.git"
+  },
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "express":">=4.9",
+    "commander": "*",
+    "q": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  },
+  "scripts": {
+    "sharetary-server": "./bin/sharetary-server",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter list --ui tdd --timeout 5s --recursive"
+  },
+  "main": "index",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
