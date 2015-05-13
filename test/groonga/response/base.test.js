@@ -5,11 +5,11 @@ var BaseResponse = require('../../../lib/groonga/response/base');
 suite('Groonga response Base', function() {
   var succeededSource = [
     [0, 1431504631.3374963, 0.0036923885345458984],
-    true
+    [true]
   ];
   var failedSource = [
     [1, 1431504631.3374963, 0.0036923885345458984],
-    false
+    [true]
   ];
 
   test('header', function() {
