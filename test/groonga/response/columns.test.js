@@ -21,7 +21,8 @@ suite('Groonga response Columns', function() {
   test('toArray', function() {
     assert.deepEqual(
       columns.toArray(),
-      [{name: 'id',                type: 'UInt32',    index: 0},
+      [
+       {name: 'id',                type: 'UInt32',    index: 0},
        {name: 'name',              type: 'ShortText', index: 1},
        {name: 'path',              type: 'ShortText', index: 2},
        {name: 'flags',             type: 'ShortText', index: 3},
