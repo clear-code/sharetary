@@ -44,7 +44,7 @@ suite('Groonga response for table_list', function() {
     response = new TableListResponse(source);
   });
 
-  test('columns', function() {
+  test('recordDefinition', function() {
     var expected = [
       {name: 'id',                type: 'UInt32',    index: 0},
       {name: 'name',              type: 'ShortText', index: 1},
@@ -55,7 +55,7 @@ suite('Groonga response for table_list', function() {
       {name: 'default_tokenizer', type: 'ShortText', index: 6},
       {name: 'normalizer',        type: 'ShortText', index: 7}
     ];
-    assert.deepEqual(response.columns.toArray(), expected);
+    assert.deepEqual(response.recordDefinition.toArray(), expected);
   });
 
   test('tables', function() {
