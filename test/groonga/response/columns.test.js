@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 
 var Columns = require('../../../lib/groonga/response/columns');
 
-suite('groonga response Columns', function() {
+suite('Groonga response Columns', function() {
   var columns;
   setup(function() {
     var source = [

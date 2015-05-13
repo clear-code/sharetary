@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 
 var BaseResponse = require('../../../lib/groonga/response/base');
 
-suite('groonga response Base', function() {
+suite('Groonga response Base', function() {
   var succeededSource = [
     [0, 1431504631.3374963, 0.0036923885345458984],
     true
