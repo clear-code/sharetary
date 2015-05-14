@@ -15,7 +15,13 @@ application.set('views', path.join(baseDir, 'views'));
 application.set('view engine', 'jade');
 
 application.get('/', function(request, response) {
-  response.render('index', { title: '' });
+  response.redirect('/timeline');
+});
+application.get('/timeline', function(request, response) {
+  response.render('timeline', { title: 'Timeline' });
+});
+application.get('/archive', function(request, response) {
+  response.render('archive', { title: 'Archive' });
 });
 
 server.on('error', function(error) {
