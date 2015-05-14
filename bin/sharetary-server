@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+// -*- js -*-
+
+var express      = require('express'),
+    http         = require('http'),
+    path         = require('path');
+
+var application = express();
+var server = http.createServer(application);
+
+// application.enable('trust proxy');
+
+var baseDir = path.join(__dirname, '..');
+application.set('views', path.join(baseDir, 'views'));
+application.set('view engine', 'jade');
+
+application.get('/', function(request, response) {
+  response.render('index', { title: '' });
+});
+
+server.on('error', function(error) {
+  server.close();
+});
+server.listen(11041, '0.0.0.0');
+
+process.on('SIGINT', function() {
+  server.close();
+});
+
+process.on('SIGTERM', function() {
+  server.close();
+});
