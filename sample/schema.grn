@@ -1,0 +1,15 @@
+table_create --name Timestamps --flags TABLE_PAT_KEY --key_type Time
+
+table_create --name Events --flags TABLE_HASH_KEY --key_type ShortText
+column_create --table Events --name type --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name description --flags COLUMN_SCALAR --type Text
+column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name author --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Timestamps
+column_create --table Events --name parent --flags COLUMN_SCALAR --type Events
+
+table_create --name Terms --flags TABLE_PAT_KEY --key_type ShortText --default_tokenizer TokenBigram --normalizer NormalizerAuto
+column_create Terms Events_title_index COLUMN_INDEX|WITH_POSITION Events title
+column_create Terms Events_description_index COLUMN_INDEX|WITH_POSITION Events description
+column_create Terms Events_uri_index COLUMN_INDEX|WITH_POSITION Events uri
