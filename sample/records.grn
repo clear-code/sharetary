@@ -1,0 +1,8 @@
+load --table Events
+[
+["_key","type","title","description","uri","author","timestamp","parent"],
+["event0","test","Initial Event","OK.","http://www.clear-code.com/","ClearCode Inc.",0.0,""],
+["event1","test","Second Event","OK.","http://www.clear-code.com/","ClearCode Inc.",1.0,""],
+["event2","test","Third Event","OK.","http://www.clear-code.com/","ClearCode Inc.",2.0,""],
+["event3","test","Comment for the Initial Event","OK.","http://www.clear-code.com/","ClearCode Inc.",3.0,"event0"]
+]

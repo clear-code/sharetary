@@ -8,3 +8,4 @@ rm -rf $DATABASE_DIR
 mkdir -p $DATABASE_DIR
 
 cat $BASE_DIR/sample/schema.grn | groonga -n $DATABASE_DIR/db
+cat $BASE_DIR/sample/records.grn | groonga $DATABASE_DIR/db
