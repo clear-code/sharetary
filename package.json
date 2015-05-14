@@ -16,10 +16,10 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "body-parser": "*",
+    "commander": "*",
     "express":">=4.9",
     "jade": "*",
     "method-override": "*",
-    "commander": "*",
     "q": "*"
   },
   "devDependencies": {
