@@ -5,6 +5,11 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 
+var GroongaClient = require('../lib/groonga/client');
+var groonga = new GroongaClient({
+                base: 'http://localhost:10041'
+              });
+
 var application = express();
 var server = http.createServer(application);
 
@@ -18,10 +23,28 @@ application.get('/', function(request, response) {
   response.redirect('/timeline');
 });
 application.get('/timeline', function(request, response) {
-  response.render('timeline', { title: 'Timeline' });
+  groonga.select({
+    table:  'Events',
+    sortby: '-timestamp',
+    limit:  100
+  }).then(function(result) {
+    response.render('timeline', {
+      title:   'Timeline',
+      records: result.records
+    });
+  });
 });
 application.get('/archive', function(request, response) {
-  response.render('archive', { title: 'Archive' });
+  groonga.select({
+    table:  'Events',
+    sortby: 'timestamp',
+    limit:  -1
+  }).then(function(result) {
+    response.render('archive', {
+      title:   'Archive',
+      records: result.records
+    });
+  });
 });
 
 server.on('error', function(error) {
