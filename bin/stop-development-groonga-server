@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BASE_DIR=$(dirname $(echo $(cd $(dirname $0);pwd)))
+
+DATABASE_DIR=$BASE_DIR/database
+PID_FILE=$DATABASE_DIR/pid
+
+if [ -f $PID_FILE ]
+then
+  pid=$(cat $PID_FILE)
+  kill $pid && rm $PID_FILE
+fi

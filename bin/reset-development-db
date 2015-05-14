@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BASE_DIR=$(dirname $(echo $(cd $(dirname $0);pwd)))
+
+DATABASE_DIR=$BASE_DIR/database
+
+rm -rf $DATABASE_DIR
+mkdir -p $DATABASE_DIR
+
+cat $BASE_DIR/sample/schema.grn | groonga -n $DATABASE_DIR/db

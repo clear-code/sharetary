@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BASE_DIR=$(dirname $(echo $(cd $(dirname $0);pwd)))
+
+DATABASE_DIR=$BASE_DIR/database
+
+groonga -d --protocol http --pid-path $DATABASE_DIR/pid $DATABASE_DIR/db
