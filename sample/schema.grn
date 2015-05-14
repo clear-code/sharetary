@@ -6,8 +6,10 @@ column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name author --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Timestamps
+column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Time
 column_create --table Events --name parent --flags COLUMN_SCALAR --type Events
+
+column_create --table Timestamps --name Events_timestamp_index --flags COLUMN_INDEX Events timestamp
 
 table_create --name Terms --flags TABLE_PAT_KEY --key_type ShortText --default_tokenizer TokenBigram --normalizer NormalizerAuto
 column_create Terms Events_title_index COLUMN_INDEX|WITH_POSITION Events title
