@@ -46,8 +46,8 @@ html(lang='ja')
           span.glyphicon.glyphicon-pencil(aria-hidden='true')
           | Reply
 
-      mixin eventHeading(event, level)
-        if level
+      mixin eventHeading(event)
+        if event.parent
           .panel-heading
             +eventLink(event)
         else
@@ -74,7 +74,7 @@ html(lang='ja')
             div(class=paddingClass)
           div(class=columnClass)
             .panel(class=itemClass)
-              +eventHeading(event, level)
+              +eventHeading(event)
               .panel-body
                 p= event.description
                 +eventMetadata(event)
