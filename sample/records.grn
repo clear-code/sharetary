@@ -1,8 +1,10 @@
 load --table Events
 [
 ["_key","type","title","description","uri","author","timestamp","parent"],
-["event0","test","Initial Event","OK.","http://www.clear-code.com/","ClearCode Inc.",0.0,""],
-["event1","test","Second Event","OK.","http://www.clear-code.com/","ClearCode Inc.",1.0,""],
-["event2","test","Third Event","OK.","http://www.clear-code.com/","ClearCode Inc.",2.0,""],
-["event3","test","Comment for the Initial Event","OK.","http://www.clear-code.com/","ClearCode Inc.",3.0,"event0"]
+["event0","test","Groonga, the Initial Event","Groonga is a fast full text search engine!","http://www.clear-code.com/","ClearCode Inc.",0.0,""],
+["event1","test","Droonga, the Second Event","Droonga is a distributed data processing system!","http://www.clear-code.com/","ClearCode Inc.",1.0,""],
+["event2","test","PGroonga","PGroonga is a plugin for PostgreSQL.","http://www.clear-code.com/","ClearCode Inc.",2.0,""],
+["comment-event0-0","test","Comment for Groonga","Happy fulltest searching!","http://www.clear-code.com/","ClearCode Inc.",3.0,"event0"],
+["comment-event1-0","test","Comment for Droonga","Is it distributed?","http://www.clear-code.com/","ClearCode Inc.",3.0,"event1"],
+["comment-event1-1","test","Comment for Droonga (2)","Yes. It's distributed.","http://www.clear-code.com/","ClearCode Inc.",3.0,"event1"]
 ]
