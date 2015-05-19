@@ -21,7 +21,7 @@ html(lang='ja')
     .container
       h1 Timeline
 
-      each event in events
+      mixin eventItem(event)
         .row
           .col-md-12
             .panel.panel-default
@@ -29,5 +29,11 @@ html(lang='ja')
                 a(href=event.uri)=  event.title
               .panel-body
                 p= event.description
+        if event.children
+          each childEvent in event.children
+            +eventItem(childEvent)
+
+      each event in events
+        +eventItem(event)
 
     script(type='text/javascript', src='/js/bootstrap.min.js')
