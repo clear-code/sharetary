@@ -35,9 +35,11 @@ html(lang='ja')
                 a(href=event.uri)=  event.title
               .panel-body
                 p= event.description
-                if event.parentEvent
-                  p.text-right
-                    a(href='#' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+                .row.small
+                  .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
+                  if event.parentEvent
+                    .col-md-6.text-right
+                      a(href='#' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
         if tree && event.children
           each childEvent in event.children
             +eventItem(childEvent, level + 1)
