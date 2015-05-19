@@ -26,7 +26,7 @@ html(lang='ja')
       mixin eventItem(event, level)
         - var paddingClass = 'col-md-' + level;
         - var columnClass = 'col-md-' + (12 - level);
-        .row
+        .row(id=event._key)
           if level
             div(class=paddingClass)
           div(class=columnClass)
@@ -35,7 +35,10 @@ html(lang='ja')
                 a(href=event.uri)=  event.title
               .panel-body
                 p= event.description
-        if event.children
+                if event.parentEvent
+                  p.text-right
+                    a(href='#' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+        if tree && event.children
           each childEvent in event.children
             +eventItem(childEvent, level + 1)
 
