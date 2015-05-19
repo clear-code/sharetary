@@ -23,9 +23,13 @@ html(lang='ja')
     .container
       h1= title
 
-      mixin eventItem(event)
+      mixin eventItem(event, level)
+        - var paddingClass = 'col-md-' + level;
+        - var columnClass = 'col-md-' + (12 - level);
         .row
-          .col-md-12
+          if level
+            div(class=paddingClass)
+          div(class=columnClass)
             .panel.panel-default
               .panel-heading
                 a(href=event.uri)=  event.title
@@ -33,9 +37,9 @@ html(lang='ja')
                 p= event.description
         if event.children
           each childEvent in event.children
-            +eventItem(childEvent)
+            +eventItem(childEvent, level + 1)
 
       each event in events
-        +eventItem(event)
+        +eventItem(event, 0)
 
     script(type='text/javascript', src='/js/bootstrap.min.js')
