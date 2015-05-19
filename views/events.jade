@@ -13,8 +13,8 @@ html(lang='ja')
           a.navbar-brand(href='/') Sharetary
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav
-            - var classesForTimeline = active == '/timeline' ? 'active' : '';
-            - var classesForArchive = active == '/archive' ? 'active' : '';
+            - var classesForTimeline = current == '/timeline' ? 'active' : '';
+            - var classesForArchive = current == '/archive' ? 'active' : '';
             li(class=classesForTimeline)
               a(href='/timeline') Timeline view
             li(class=classesForArchive)
@@ -42,7 +42,7 @@ html(lang='ja')
           +eventLabel(event)
 
       mixin replyLink(event)
-        a(href='/reply?event=' + event._key)
+        a(href='/reply?event=' + event._key + '&from=' + current)
           span.glyphicon.glyphicon-pencil(aria-hidden='true')
           | Reply
 
