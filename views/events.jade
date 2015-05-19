@@ -78,9 +78,9 @@ html(lang='ja')
               .panel-body
                 p= event.description
                 +eventMetadata(event)
-        if tree && event.children
-          each childEvent in event.children
-            +eventItem(childEvent, level + 1)
+        if tree && event.descendants
+          each descendantEvent in event.descendants
+            +eventItem(descendantEvent, level + 1)
 
       each event in events
         +eventItem(event, 0)
