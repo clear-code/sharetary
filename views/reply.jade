@@ -37,7 +37,8 @@ html(lang='ja')
           label.input-group-addon(for='description') Comment
           textarea#description.form-control(name='description', placeholder='Your comment', rows=5)
         p.text-right
-          input(type='hidden', parent=parent)
+          input(type='hidden', name='parent', value=parent)
+          input(type='hidden', name='key', value='comment-' + Date.now() + ':' + Math.round(Math.random() * 65000))
           input.btn.btn-default(type='submit', value='Submit')
 
     script(type='text/javascript', src='/js/bootstrap.min.js')
