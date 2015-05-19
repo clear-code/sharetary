@@ -27,7 +27,7 @@ html(lang='ja')
         - var paddingClass = 'col-md-' + level;
         - var columnClass = 'col-md-' + (12 - level);
         - var itemClass = event.parent ? 'panel-info' : 'panel-default' ;
-        .row(id=event._key)
+        .row(id='event-' + event._key)
           if level
             div(class=paddingClass)
           div(class=columnClass)
@@ -42,7 +42,7 @@ html(lang='ja')
                   .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
                   if event.parentEvent
                     .col-md-6.text-right
-                      a(href='#' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+                      a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
         if tree && event.children
           each childEvent in event.children
             +eventItem(childEvent, level + 1)
