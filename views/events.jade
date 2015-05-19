@@ -49,14 +49,14 @@ html(lang='ja')
       mixin eventHeading(event, level)
         if level
           .panel-heading
+            +eventLink(event)
+        else
+          .panel-heading
             .row
               .col-md-10
                 +eventLink(event)
               .col-md-2.text-right
                 +replyLink(event)
-        else
-          .panel-heading
-            +eventLink(event)
 
       mixin eventMetadata(event)
         .row.small
