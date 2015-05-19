@@ -7,6 +7,12 @@ PID_FILE=$DATABASE_DIR/pid
 
 if [ -f $PID_FILE ]
 then
+  echo "Stopping development Groonga server..."
   pid=$(cat $PID_FILE)
-  kill $pid && rm $PID_FILE
+  kill $pid
+  rm $PID_FILE
+  exit 0
+else
+  echo "Development Groonga server is not running."
+  exit 1
 fi
