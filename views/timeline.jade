@@ -1,0 +1,33 @@
+doctype html
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    title= (title ? title + ' - ' : '') + 'Sharery'
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', type='text/css', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/css/bootstrap-theme.min.css')
+  body
+    .navbar.navbar-default.navbar-static-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') Sharetary
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/timeline') Timeline view
+            li
+              a(href='/archive') Archive view
+
+    .container
+      h1 Sharetary Timeline
+
+      each event in events
+        .row
+          .col-md-12
+            .panel.panel-default
+              .panel-heading
+                a(href=event.uri)=  event.title
+              .panel-body
+                p= event.description
+
+    script(type='text/javascript', src='/js/bootstrap.min.js')
