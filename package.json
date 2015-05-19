@@ -19,8 +19,10 @@
     "commander": "*",
     "express":">=4.9",
     "jade": "*",
+    "less-middleware": ">=0.2",
     "method-override": "*",
-    "q": "*"
+    "q": "*",
+    "serve-static": "*"
   },
   "devDependencies": {
     "chai": "*",
