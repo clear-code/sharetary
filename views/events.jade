@@ -33,9 +33,15 @@ html(lang='ja')
           div(class=columnClass)
             .panel(class=itemClass)
               .panel-heading
-                a(href=event.uri)
-                  != event.title
-                  span.text-muted= ', by ' + event.author
+                .row
+                  .col-md-10
+                    a(href=event.uri)
+                      != event.title
+                      span.text-muted= ', by ' + event.author
+                  .col-md-2.text-right
+                    a(href='/reply?event=' + event._key)
+                      span.glyphicon.glyphicon-pencil(aria-hidden='true')
+                      | Reply
               .panel-body
                 p= event.description
                 .row.small
