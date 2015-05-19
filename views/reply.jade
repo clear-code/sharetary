@@ -23,4 +23,21 @@ html(lang='ja')
     .container
       h1= title
 
+      form(method='POST', action='/add-reply')
+        p.input-group
+          label.input-group-addon(for='author') Author
+          input#author.form-control(type='text', name='author', placeholder='Your name')
+        p.input-group
+          label.input-group-addon(for='title') Title
+          input#title.form-control(type='text', name='title', placeholder='Title of this comment')
+        p.input-group
+          label.input-group-addon(for='uri') URI
+          input#uri.form-control(type='text', name='uri', placeholder='Related URI')
+        p.input-group
+          label.input-group-addon(for='description') Comment
+          textarea#description.form-control(name='description', placeholder='Your comment', rows=5)
+        p.text-right
+          input(type='hidden', parent=parent)
+          input.btn.btn-default(type='submit', value='Submit')
+
     script(type='text/javascript', src='/js/bootstrap.min.js')
