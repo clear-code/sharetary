@@ -1,24 +1,8 @@
 doctype html
 html(lang='ja')
-  head
-    meta(charset='UTF-8')
-    title= title + ' - Sharetary'
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', type='text/css', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', type='text/css', href='/css/bootstrap-theme.min.css')
+  include ./includes/head.jade
   body
-    .navbar.navbar-default.navbar-static-top
-      .container
-        .navbar-header
-          a.navbar-brand(href='/') Sharetary
-        #navbar.navbar-collapse.collapse
-          ul.nav.navbar-nav
-            - var classesForTimeline = active == '/timeline' ? 'active' : '';
-            - var classesForArchive = active == '/archive' ? 'active' : '';
-            li(class=classesForTimeline)
-              a(href='/timeline') Timeline view
-            li(class=classesForArchive)
-              a(href='/archive') Archive view
+    include ./includes/navbar.jade
 
     .container
       h1= title
@@ -41,4 +25,4 @@ html(lang='ja')
           input(type='hidden', name='parent', value=parent)
           input.btn.btn-default(type='submit', value='Submit')
 
-    script(type='text/javascript', src='/js/bootstrap.min.js')
+    include ./includes/foot.jade

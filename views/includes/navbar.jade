@@ -1,0 +1,15 @@
+.navbar.navbar-default.navbar-static-top
+  .container
+    .navbar-header
+      a.navbar-brand(href='/') Sharetary
+    #navbar.navbar-collapse.collapse
+      ul.nav.navbar-nav
+        - var classesForTimeline = current == '/timeline' ? 'active' : '';
+        - var classesForArchive = current == '/archive' ? 'active' : '';
+        - var classesForAdd = current == '/add' ? 'active' : '';
+        li(class=classesForTimeline)
+          a(href='/timeline') Timeline view
+        li(class=classesForArchive)
+          a(href='/archive') Archive view
+        li(class=classesForAdd)
+          a(href='/add') Post
