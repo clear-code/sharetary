@@ -23,6 +23,48 @@ html(lang='ja')
     .container
       h1= title
 
+      mixin eventLabel(event)
+        if event.title && event.author
+          != event.title
+          span.text-muted= ', by ' + event.author
+        else if event.title
+          != event.title
+        else if event.author
+          span.text-muted= 'by ' + event.author
+        else
+          != event.uri
+
+      mixin eventLink(event)
+        if event.uri
+          a(href=event.uri)
+            +eventLabel(event)
+        else
+          +eventLabel(event)
+
+      mixin replyLink(event)
+        a(href='/reply?event=' + event._key)
+          span.glyphicon.glyphicon-pencil(aria-hidden='true')
+          | Reply
+
+      mixin eventHeading(event, level)
+        if level
+          .panel-heading
+            .row
+              .col-md-10
+                +eventLink(event)
+              .col-md-2.text-right
+                +replyLink(event)
+        else
+          .panel-heading
+            +eventLink(event)
+
+      mixin eventMetadata(event)
+        .row.small
+          .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
+          if event.parentEvent
+            .col-md-6.text-right
+              a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+
       mixin eventItem(event, level)
         - var paddingClass = 'col-md-' + level;
         - var columnClass = 'col-md-' + (12 - level);
@@ -32,23 +74,10 @@ html(lang='ja')
             div(class=paddingClass)
           div(class=columnClass)
             .panel(class=itemClass)
-              .panel-heading
-                .row
-                  .col-md-10
-                    a(href=event.uri)
-                      != event.title
-                      span.text-muted= ', by ' + event.author
-                  .col-md-2.text-right
-                    a(href='/reply?event=' + event._key)
-                      span.glyphicon.glyphicon-pencil(aria-hidden='true')
-                      | Reply
+              +eventHeading(event, level)
               .panel-body
                 p= event.description
-                .row.small
-                  .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
-                  if event.parentEvent
-                    .col-md-6.text-right
-                      a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+                +eventMetadata(event)
         if tree && event.children
           each childEvent in event.children
             +eventItem(childEvent, level + 1)
