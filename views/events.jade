@@ -26,13 +26,16 @@ html(lang='ja')
       mixin eventItem(event, level)
         - var paddingClass = 'col-md-' + level;
         - var columnClass = 'col-md-' + (12 - level);
+        - var itemClass = event.parent ? 'panel-info' : 'panel-default' ;
         .row(id=event._key)
           if level
             div(class=paddingClass)
           div(class=columnClass)
-            .panel.panel-default
+            .panel(class=itemClass)
               .panel-heading
-                a(href=event.uri)=  event.title
+                a(href=event.uri)
+                  != event.title
+                  span.text-muted= ', by ' + event.author
               .panel-body
                 p= event.description
                 .row.small
