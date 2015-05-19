@@ -9,5 +9,6 @@ load --table Events
 ["comment-event1-1","test","Comment for Droonga (2)","Yes. It's distributed.","","ClearCode Inc.",5.0,"event1"],
 ["no-author-event","test","No Author","This event has no author.","http://www.clear-code.com/","",6.0,""],
 ["no-title-comment","test","","Comment without title.","","anyone",7.0,"event0"],
-["completely-anonymous","test","","This event has no title and no author.","http://www.clear-code.com/","",8.0,""]
+["completely-anonymous","test","","This event has no title and no author.","http://www.clear-code.com/","",8.0,""],
+["comment-for-comment","test","","This is a comment for another comment.","http://www.clear-code.com/","",9.0,"comment-event1-0"]
 ]
