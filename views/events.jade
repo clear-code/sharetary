@@ -2,7 +2,7 @@ doctype html
 html(lang='ja')
   head
     meta(charset='UTF-8')
-    title Timeline - Sharetary
+    title= title + ' - Sharetary'
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', type='text/css', href='/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='/css/bootstrap-theme.min.css')
@@ -13,13 +13,15 @@ html(lang='ja')
           a.navbar-brand(href='/') Sharetary
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav
-            li.active
+            - var classesForTimeline = active == '/timeline' ? 'active' : '';
+            - var classesForArchive = active == '/archive' ? 'active' : '';
+            li(class=classesForTimeline)
               a(href='/timeline') Timeline view
-            li
+            li(class=classesForArchive)
               a(href='/archive') Archive view
 
     .container
-      h1 Timeline
+      h1= title
 
       mixin eventItem(event)
         .row
