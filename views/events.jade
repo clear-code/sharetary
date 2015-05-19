@@ -47,16 +47,12 @@ html(lang='ja')
           | Reply
 
       mixin eventHeading(event)
-        if event.parent
-          .panel-heading
-            +eventLink(event)
-        else
-          .panel-heading
-            .row
-              .col-md-10
-                +eventLink(event)
-              .col-md-2.text-right
-                +replyLink(event)
+        .panel-heading
+          .row
+            .col-md-10
+              +eventLink(event)
+            .col-md-2.text-right
+              +replyLink(event)
 
       mixin eventMetadata(event)
         .row.small
