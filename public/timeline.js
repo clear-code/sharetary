@@ -1,5 +1,5 @@
 function checkNewEvents() {
-  var boundary = $('.event-item').first().attr('data-timestamp');
+  var boundary = $('.event-item').first().attr('data-created-at');
   $.ajax({
     url: '/timeline-new-events?boundary=' + boundary
   }).done(function(data) {
