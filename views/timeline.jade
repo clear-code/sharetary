@@ -9,8 +9,9 @@ html(lang='ja')
 
       include ./includes/events-shared.jade
 
-      each event in events
-        +eventItem(event, 0)
+      #events
+        each event in events
+          +eventItem(event, 0)
 
     script(type='text/javascript', src='/timeline.js')
     include ./includes/foot.jade
