@@ -40,7 +40,7 @@ mixin eventItem(event, level)
   - var paddingClass = 'col-md-' + level;
   - var columnClass = 'col-md-' + (12 - level);
   - var itemClass = event.parent ? 'panel-info' : 'panel-default' ;
-  .row(id='event-' + event._key)
+  .row.event-item(id='event-' + event._key, data-timestamp=event.timestamp)
     if level
       div(class=paddingClass)
     div(class=columnClass)
