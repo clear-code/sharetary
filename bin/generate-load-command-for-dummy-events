@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "load --table Events"
+echo "["
+while true
+do
+  timestamp=$(date +%s)
+  timestamp_str=$(date)
+  cat <<DATA
+{"_key":"dummy-event-$timestamp","type":"dummy","title":"Title at $timestamp_str","description":"Description $timestamp_str","author":"author","uri":"http://www.clear-code.com/#dummy-event-$timestamp","timestamp":$timestamp},
+DATA
+  sleep 1
+done
+echo "]"
+

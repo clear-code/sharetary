@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BASE_DIR=$(dirname $(echo $(cd $(dirname $0);pwd)))
+
+DATABASE_PATH=$BASE_DIR/database/db
+
+$BASE_DIR/bin/generate-load-command-for-dummy-events | groonga $DATABASE_PATH

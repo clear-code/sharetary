@@ -33,6 +33,7 @@
     "reset-development-db": "bash ./bin/reset-development-db",
     "start-development-groonga-server": "bash ./bin/start-development-groonga-server",
     "stop-development-groonga-server": "bash ./bin/stop-development-groonga-server",
+    "simulated-crawl": "bash ./bin/simulated-crawl",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter list --ui tdd --timeout 5s --recursive"
   },
   "main": "index",
