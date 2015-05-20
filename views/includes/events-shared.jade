@@ -1,0 +1,54 @@
+      mixin eventLabel(event)
+        if event.title && event.author
+          != event.title
+          span.text-muted= ', by ' + event.author
+        else if event.title
+          != event.title
+        else if event.author
+          span.text-muted= 'by ' + event.author
+        else
+          != event.uri
+
+      mixin eventLink(event)
+        if event.uri
+          a(href=event.uri)
+            +eventLabel(event)
+        else
+          +eventLabel(event)
+
+      mixin replyLink(event)
+        a(href='/reply?event=' + event._key + '&from=' + current)
+          span.glyphicon.glyphicon-pencil(aria-hidden='true')
+          | Reply
+
+      mixin eventHeading(event)
+        .panel-heading
+          .row
+            .col-md-10
+              +eventLink(event)
+            .col-md-2.text-right
+              +replyLink(event)
+
+      mixin eventMetadata(event)
+        .row.small
+          .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
+          if event.parentEvent
+            .col-md-6.text-right
+              a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+
+      mixin eventItem(event, level)
+        - var paddingClass = 'col-md-' + level;
+        - var columnClass = 'col-md-' + (12 - level);
+        - var itemClass = event.parent ? 'panel-info' : 'panel-default' ;
+        .row(id='event-' + event._key)
+          if level
+            div(class=paddingClass)
+          div(class=columnClass)
+            .panel(class=itemClass)
+              +eventHeading(event)
+              .panel-body
+                p= event.description
+                +eventMetadata(event)
+        if tree && event.descendants
+          each descendantEvent in event.descendants
+            +eventItem(descendantEvent, level + 1)
