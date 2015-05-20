@@ -5,7 +5,6 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 
-var apis = require('../lib/apis');
 var views = require('../lib/views');
 var GroongaClient = require('../lib/groonga/client');
 var groonga = new GroongaClient({
@@ -17,7 +16,6 @@ var server = http.createServer(application);
 
 // application.enable('trust proxy');
 
-apis.init({ application: application, groonga: groonga });
 views.init({ application: application, groonga: groonga });
 
 server.on('error', function(error) {
