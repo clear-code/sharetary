@@ -52,7 +52,7 @@ mixin eventItem(event, level)
       .panel(class=itemClass)
         +eventHeading(event)
         .panel-body
-          p= event.description
+          p(style='white-space:pre-wrap')= event.description
           +eventMetadata(event)
   if tree && event.descendants
     each descendantEvent in event.descendants
