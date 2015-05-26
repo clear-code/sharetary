@@ -36,7 +36,7 @@ mixin eventHeading(event)
 
 mixin eventMetadata(event)
   .row.small
-    .col-md-6.text-muted= (new Date(event.timestamp)).toLocaleString()
+    .col-md-6.text-muted= (new Date(event.timestamp * 1000)).toLocaleString()
     if event.parentEvent
       .col-md-6.text-right
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
