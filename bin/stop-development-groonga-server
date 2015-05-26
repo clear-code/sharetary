@@ -10,7 +10,7 @@ then
   echo "Stopping development Groonga server..."
   pid=$(cat $PID_FILE)
   kill $pid
-  rm $PID_FILE
+  rm -f $PID_FILE
   exit 0
 else
   echo "Development Groonga server is not running."
