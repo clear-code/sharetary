@@ -17,9 +17,14 @@ mixin eventLink(event)
     +eventLabel(event)
 
 mixin replyLink(event)
-  a(href='/reply?event=' + event._key + '&from=' + current)
-    span.glyphicon.glyphicon-pencil(aria-hidden='true')
-    | Reply
+  if event.reply_uri
+    a(href=event.reply_uri)
+      span.glyphicon.glyphicon-pencil(aria-hidden='true')
+      | Reply
+  else
+    a(href='/reply?event=' + event._key + '&from=' + current)
+      span.glyphicon.glyphicon-pencil(aria-hidden='true')
+      | Reply
 
 mixin eventHeading(event)
   .panel-heading
