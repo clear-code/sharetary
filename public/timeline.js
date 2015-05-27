@@ -4,9 +4,7 @@ function checkNewEvents() {
     url: '/timeline-new-events?boundary=' + boundary
   }).done(function(data) {
     var newEvents = $(data);
-    newEvents.each(function(newEvent) {
-      newEvents.css({ display: 'none' });
-    });
+    newEvents.css({ display: 'none' });
     $('#events').prepend(newEvents);
     newEvents.animate({ height: 'show', opacity: 'show' }, 'normal');
     setTimeout(checkNewEvents, 3000);
