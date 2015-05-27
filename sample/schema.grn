@@ -2,6 +2,7 @@ table_create --name Timestamps --flags TABLE_PAT_KEY --key_type Time
 
 table_create --name Events --flags TABLE_HASH_KEY --key_type ShortText
 column_create --table Events --name type --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name repository --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
@@ -15,6 +16,7 @@ column_create --table Timestamps --name Events_timestamp_index --flags COLUMN_IN
 column_create --table Timestamps --name Events_created_at_index --flags COLUMN_INDEX --type Events --source created_at
 
 table_create --name Terms --flags TABLE_PAT_KEY --key_type ShortText --default_tokenizer TokenBigram --normalizer NormalizerAuto
+column_create --table Terms --name Events_repository_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source repository
 column_create --table Terms --name Events_title_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source title
 column_create --table Terms --name Events_description_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source description
 column_create --table Terms --name Events_uri_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source uri
