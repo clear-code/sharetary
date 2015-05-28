@@ -7,19 +7,19 @@
   margin-top: -50px;
 }
 
-.panel,
-.panel-body,
-.panel-body p {
+.event-item .panel,
+.event-item .panel-body,
+.event-item .panel-body p {
   position: relative;
   overflow: hidden;
 }
 
-.panel-body p {
+.event-item .panel-body p {
   max-height: 6.5em;
   white-space: pre-wrap;
 }
 
-.panel::before {
+.event-item .panel::before {
   content: attr(data-event-type);
   font-size: 60px;
   font-weight: bold;
@@ -35,11 +35,11 @@
   z-index: 5;
 }
 
-.panel-body {
+.event-item .panel-body {
   z-index: 10;
 }
 
-.panel-body * {
+.event-item .panel-body * {
   text-shadow: 0 0 0.3em white,
                0 0 0.3em white,
                0 0 0.3em white,
