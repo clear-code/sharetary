@@ -1,3 +1,23 @@
+.panel,
+.panel-body {
+  position: related;
+}
+
+.panel::before {
+  content: attr(data-event-type);
+  font-size: 4em;
+  font-weight: bold;
+  opacity: 0.15;
+  position: absolute;
+  right: 30px;
+  top: 0;
+  z-index: 5;
+}
+
+.panel-body {
+  z-index: 10;
+}
+
 .author-icon {
   max-width: 32px;
   max-height: 32px;

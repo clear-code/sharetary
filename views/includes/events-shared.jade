@@ -37,17 +37,16 @@ mixin eventMetadata(event)
 mixin eventItem(event, level)
   - var paddingClass = 'col-md-' + level;
   - var columnClass = 'col-md-' + (12 - level);
-  - var itemClass = event.type == 'code' ? 'panel-default' : 'panel-info' ;
   .row.event-item(id='event-' + event._key,
                   data-created-at=event.created_at,
+                  data-event-type=event.type,
                   title=event.title + ' by ' + event.author,
-                  class='author-class-' + event.author_class,
-                  class='event-type-' + event.type)
+                  class='author-class-' + event.author_class)
     if level
       div(class=paddingClass)
     div(class=columnClass)
-      .panel(class=itemClass)
-        .panel-body
+      .panel.panel-default(data-event-type=event.type)
+        .panel-body(data-event-type=event.type)
           p(style='white-space:pre-wrap')
             img(src=event.author_icon, class='author-icon')
             != event.description
