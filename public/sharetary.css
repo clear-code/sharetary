@@ -38,9 +38,10 @@
 }
 
 .author-icon {
+  float: left;
+  margin-right: 0.5em;
   max-width: 32px;
   max-height: 32px;
-  margin-right: 0.5em;
 }
 
 .author-class-minor {
