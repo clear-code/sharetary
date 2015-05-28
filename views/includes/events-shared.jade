@@ -10,7 +10,12 @@ mixin replyLink(event)
 
 mixin eventMetadata(event)
   .row.small
-    .col-md-6.text-muted= (new Date(event.timestamp * 1000)).toLocaleString()
+    .col-md-6.text-muted
+      - var formattedDate = (new Date(event.timestamp * 1000)).toLocaleString()
+      if event.uri
+        a(href=event.uri)= formattedDate
+      else
+        != formattedDate
     .col-md-6.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
