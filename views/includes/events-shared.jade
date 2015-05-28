@@ -30,10 +30,11 @@ mixin eventItem(event, width, indent, binaryClass)
   .row.event-item(id='event-' + event._key,
                   data-created-at=event.created_at,
                   data-event-type=event.type,
-                  data-event-binary=binaryClass,
+                  data-event-binary=binaryClass || 'odd',
                   title=event.title + ' by ' + event.author,
                   class='author-class-' + event.author_class,
-                  class='event-binary-' + binaryClass)
+                  class='event-class-' + event.class,
+                  class='event-binary-' + (binaryClass || 'odd'))
     if indent
       div(class=paddingClass)
     div(class=columnClass)
