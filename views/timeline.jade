@@ -17,7 +17,5 @@ html(lang='ja')
           +eventItem(event, halfWidth, 0, eventItemBinaryClass)
           - eventItemBinaryClass = eventItemBinaryClass == 'odd' ? 'even' : 'odd' ;
 
-    input#filter-authors(value=filters.authors || '')
-    input#filter-repository(value=filters.repository || '')
     script(type='text/javascript', src='/timeline.js')
     include ./includes/foot.jade

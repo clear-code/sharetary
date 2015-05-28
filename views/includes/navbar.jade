@@ -1,3 +1,5 @@
+include ./filters.jade
+
 .navbar.navbar-default.navbar-static-top
   .container
     .navbar-header
@@ -13,3 +15,9 @@
           a(href='/archive') Archive view
         li(class=classesForAdd)
           a(href='/add') Post
+      if current == '/archive' || current == '/timeline'
+        .nav.navbar-nav.navbar-right
+          +filtersButton
+
+if current == '/archive' || current == '/timeline'
+  +filtersDialog
