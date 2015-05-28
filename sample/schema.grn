@@ -8,6 +8,7 @@ column_create --table Events --name description --flags COLUMN_SCALAR --type Tex
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name reply_uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name author --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name author_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name author_class --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Time
 column_create --table Events --name created_at --flags COLUMN_SCALAR --type Time
