@@ -18,7 +18,7 @@ mixin eventMetadata(event)
         != formattedDate
       != ', '
       - var authorsFilter = filters.authors ? '&authors=' + filters.authors : '' ;
-      a(href=current + '?repository=' + event.repository + authorsFilter)= event.repository
+      a(href=current + '?scope=' + event.scope + authorsFilter)= event.scope
     .col-md-3.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
@@ -41,8 +41,8 @@ mixin eventItem(event, width, indent, binaryClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
           p
-            - var repositoryFilter = filters.repository ? '&repository=' + filters.repository : '' ;
-            a(href=current + '?authors=' + event.author + repositoryFilter)
+            - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
+            a(href=current + '?authors=' + event.author + scopeFilter)
               img(src=event.author_icon, class='author-icon')
             != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
           +eventMetadata(event)

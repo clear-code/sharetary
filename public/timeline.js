@@ -18,7 +18,7 @@ function checkNewEvents() {
     'boundary=' + boundary,
     'lastBinaryClass=' + lastBinaryClass,
     'authors=' + $('#filter-authors').attr('value'),
-    'repository=' + $('#filter-repository').attr('value')
+    'scope=' + $('#filter-scope').attr('value')
   ];
   $.ajax({
     url: '/timeline-new-events?' + parameters.join('&')
