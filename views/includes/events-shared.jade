@@ -48,7 +48,9 @@ mixin eventItem(event, level)
     div(class=columnClass)
       .panel(class=itemClass)
         .panel-body
-          p(style='white-space:pre-wrap')= event.description
+          p(style='white-space:pre-wrap')
+            img(src=event.author_icon, class='author-icon')
+            != event.description
           +eventMetadata(event)
   if tree && event.descendants
     each descendantEvent in event.descendants
