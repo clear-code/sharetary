@@ -1,16 +1,28 @@
 .panel,
-.panel-body {
+.panel-body,
+.panel-body p {
   position: related;
+  overflow: hidden;
+}
+
+.panel-body p {
+  max-height: 6.5em;
+  white-space: pre-wrap;
 }
 
 .panel::before {
   content: attr(data-event-type);
-  font-size: 4em;
+  font-size: 60px;
   font-weight: bold;
+  line-height: 0.8;
   opacity: 0.15;
   position: absolute;
   right: 30px;
-  top: 0;
+  text-align: right;
+  top: 20px;
+  transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  max-width: 8em;
   z-index: 5;
 }
 
