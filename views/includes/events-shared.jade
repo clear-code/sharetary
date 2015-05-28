@@ -42,7 +42,12 @@ mixin eventItem(event, width, indent, binaryClass)
         .panel-body(data-event-type=event.type)
           p
             - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
-            a(href=current + '?actors=' + event.actor + scopeFilter)
-              img(src=event.actor_icon, class='actor-icon')
+            - var actorLink = current + '?actors=' + event.actor + scopeFilter;
+            if event.actor_icon
+              a.actor.actor-icon(href=actorLink, title=event.actor)
+                img(src=event.actor_icon)
+            else
+              a.actor(href=actorLink, title=event.actor)
+                != event.actor + ':'
             != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
           +eventMetadata(event)

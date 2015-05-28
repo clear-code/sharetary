@@ -89,6 +89,9 @@
 .actor-icon {
   float: left;
   margin-right: 0.5em;
+}
+
+.actor-icon img {
   max-width: 32px;
   max-height: 32px;
 }
