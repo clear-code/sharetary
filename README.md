@@ -81,9 +81,32 @@ Sharetary simply ignores them.
 
 ## Typical use case: watching users' activities on the GitHub
 
-For example, you can watch user-related events on the GitHub.
-See [the example setting](sample/fluent-plugin-github-activities.conf).
-It requires some other products like:
+This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14.04 server.
 
- * https://github.com/clear-code/fluent-plugin-github-activities
- * https://github.com/groonga/fluent-plugin-groonga
+ 1. [Install Groonga with the instruction](http://groonga.org/docs/install/ubuntu.html).
+    (If you have your existing Groonga or Droonga, you can skip this step.)
+ 2. Install fluentd and td-agent.
+    
+    ~~~
+    $ sudo apt-get install ntp
+    $ sudo service ntp restart
+    $ curl -L http://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent2.sh | sudo sh
+    $ sudo mkdir -p /var/spool/td-agent/buffer/
+    $ sudo chown -R td-agent:td-agent /var/spool/td-agent/
+    ~~~
+ 3. Install required fluentd plugins.
+    
+    ~~~
+    $ sudo td-agent-gem install fluent-plugin-github-activities
+    $ sudo td-agent-gem install fluent-plugin-map
+    $ sudo td-agent-gem install fluent-plugin-record-reformer
+    $ sudo td-agent-gem install fluent-plugin-groonga
+    ~~~
+ 4. Configure td-agent.
+    
+    ~~~
+    $ sudo vi /etc/td-agent/td-agent.conf
+    ~~~
+    
+    See also [the example configuration to crawl and load GitHub activities](sample/fluent-plugin-github-activities.conf).
+    It includes rules to convert fetched GitHub activities to Sharetary events.
