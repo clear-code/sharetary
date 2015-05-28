@@ -26,20 +26,13 @@ mixin replyLink(event)
       span.glyphicon.glyphicon-pencil(aria-hidden='true')
       | Reply
 
-mixin eventHeading(event)
-  .panel-heading
-    .row
-      .col-md-10
-        +eventLink(event)
-      .col-md-2.text-right
-        +replyLink(event)
-
 mixin eventMetadata(event)
   .row.small
     .col-md-6.text-muted= (new Date(event.timestamp * 1000)).toLocaleString()
-    if event.parentEvent
-      .col-md-6.text-right
-        a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title
+    .col-md-6.text-right
+      if event.parentEvent
+        a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
+      +replyLink(event)
 
 mixin eventItem(event, level)
   - var paddingClass = 'col-md-' + level;
@@ -47,13 +40,13 @@ mixin eventItem(event, level)
   - var itemClass = event.type == 'code' ? 'panel-default' : 'panel-info' ;
   .row.event-item(id='event-' + event._key,
                   data-created-at=event.created_at,
+                  title=event.title + ' by ' + event.author,
                   class='author-class-' + event.author_class,
                   class='event-type-' + event.type)
     if level
       div(class=paddingClass)
     div(class=columnClass)
       .panel(class=itemClass)
-        +eventHeading(event)
         .panel-body
           p(style='white-space:pre-wrap')= event.description
           +eventMetadata(event)
