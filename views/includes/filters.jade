@@ -20,6 +20,11 @@ mixin filtersDialog
             p.input-group
               label.input-group-addon(for='filter-repository') Repository:
               input#filter-repository.form-control(name='repository', value=filters.repository || '', placeholder='Name of a repository')
+            p.input-group
+              != 'From '
+              input#filter-after(type='number', name='after', value=filters.after)
+              != ' to '
+              input#filter-before(type='number', name='before', value=filters.before)
           .modal-footer
             a.btn.btn-default(href=current) Clear
             input.btn.btn-primary(type='submit', value='Apply')
