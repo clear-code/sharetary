@@ -16,6 +16,8 @@ mixin eventMetadata(event)
         a(href=event.uri)= formattedDate
       else
         != formattedDate
+      , 
+      a(href='https://github.com/' + event.repository)= event.repository
     .col-md-6.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
