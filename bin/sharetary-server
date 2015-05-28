@@ -3,25 +3,57 @@
 
 var express = require('express');
 var http = require('http');
+var options = require('commander');
 var path = require('path');
+
+options.host             = '0.0.0.0';
+options.port             = 11041;
+options.enableTrustProxy = false;
+
+options.groongaHost = 'localhost';
+options.groongaPort = 10041;
+
+
+function intOption(newValue, oldValue) {
+  return parseInt(newValue);
+}
+
+options
+  .option('--host <host>',
+          'Host to listen (' + options.host + ')')
+  .option('--port <port>',
+          'Port number (' + options.port + ')',
+          intOption)
+  .option('--enable-trust-proxy',
+          'Enable "trust proxy" configuration. ' +
+            'It is required when you run this server behind a reverse proxy. ' +
+            '(' + options.enableTrustProxy + ')')
+  .option('--groonga-host <host>',
+          'Host of the Groonga HTTP server (' + options.groongaHost + ')')
+  .option('--groonga-port <port>',
+          'Port number of the Groonga HTTP server (' + options.groongaPort + ')',
+          intOption)
+  .parse(process.argv);
+
 
 var views = require('../lib/views');
 var GroongaClient = require('../lib/groonga/client');
 var groonga = new GroongaClient({
-                base: 'http://localhost:10041'
+                base: 'http://' + options.groongaHost + ':' + options.groongaPort
               });
 
 var application = express();
 var server = http.createServer(application);
 
-// application.enable('trust proxy');
+if (options.enableTrustProxy)
+  application.enable('trust proxy');
 
 views.init({ application: application, groonga: groonga });
 
 server.on('error', function(error) {
   server.close();
 });
-server.listen(11041, '0.0.0.0');
+server.listen(options.port, options.host);
 
 process.on('SIGINT', function() {
   server.close();
