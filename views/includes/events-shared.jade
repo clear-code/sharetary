@@ -17,7 +17,7 @@ mixin eventMetadata(event)
       else
         != formattedDate
       != ', '
-      a(href='https://github.com/' + event.repository)= event.repository
+      a(href=current + '?repository=' + event.repository)= event.repository
     .col-md-3.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
@@ -39,6 +39,7 @@ mixin eventItem(event, width, indent, binaryClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
           p
-            img(src=event.author_icon, class='author-icon')
+            a(href=current + '?authors=' + event.author)
+              img(src=event.author_icon, class='author-icon')
             != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
           +eventMetadata(event)
