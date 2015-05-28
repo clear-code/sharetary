@@ -30,6 +30,13 @@
   z-index: 10;
 }
 
+.panel-body * {
+  text-shadow: 0 0 0.3em white,
+               0 0 0.3em white,
+               0 0 0.3em white,
+               0 0 0.3em white;
+}
+
 .author-icon {
   max-width: 32px;
   max-height: 32px;
