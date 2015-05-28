@@ -40,11 +40,50 @@
   z-index: 10;
 }
 
+.event-class-minor .panel {
+}
+
+.event-class-major .panel {
+  background: #ebffbf; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ebffbf 0%, #b1ff59 40%, #60ce06 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebffbf), color-stop(40%,#b1ff59), color-stop(100%,#60ce06)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ebffbf 0%,#b1ff59 40%,#60ce06 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ebffbf 0%,#b1ff59 40%,#60ce06 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ebffbf 0%,#b1ff59 40%,#60ce06 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ebffbf 0%,#b1ff59 40%,#60ce06 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebffbf', endColorstr='#60ce06',GradientType=0 ); /* IE6-9 */
+}
+
+.event-class-important .panel {
+  background: #fff8bf; /* Old browsers */
+  background: -moz-linear-gradient(top,  #fff8bf 0%, #ffe359 40%, #ffbd07 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff8bf), color-stop(40%,#ffe359), color-stop(100%,#ffbd07)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #fff8bf 0%,#ffe359 40%,#ffbd07 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #fff8bf 0%,#ffe359 40%,#ffbd07 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #fff8bf 0%,#ffe359 40%,#ffbd07 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #fff8bf 0%,#ffe359 40%,#ffbd07 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff8bf', endColorstr='#ffbd07',GradientType=0 ); /* IE6-9 */
+}
+
 .event-item .panel-body * {
   text-shadow: 0 0 0.3em white,
                0 0 0.3em white,
                0 0 0.3em white,
                0 0 0.3em white;
+}
+
+.event-item.event-class-major .panel-body * {
+  text-shadow: 0 0 0.3em #b1ff59,
+               0 0 0.3em #b1ff59,
+               0 0 0.3em #b1ff59,
+               0 0 0.3em #b1ff59;
+}
+
+.event-item.event-class-important .panel-body * {
+  text-shadow: 0 0 0.3em #ffe359,
+               0 0 0.3em #ffe359,
+               0 0 0.3em #ffe359,
+               0 0 0.3em #ffe359;
 }
 
 .author-icon {
