@@ -1,3 +1,9 @@
+.compact-events-view .event-binary-even > *[class^="col-md-"] {
+  float: right;
+  margin-top: -50px;
+  margin-bottom: -50px;
+}
+
 .panel,
 .panel-body,
 .panel-body p {

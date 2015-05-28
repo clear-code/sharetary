@@ -11,9 +11,11 @@ function getElementsHeight(collection) {
 }
 
 function checkNewEvents() {
-  var boundary = $('.event-item').first().attr('data-created-at');
+  var latestItem = $('.event-item').first();
+  var boundary = latestItem.attr('data-created-at');
+  var lastBinaryClass = latestItem.attr('data-event-binary');
   $.ajax({
-    url: '/timeline-new-events?boundary=' + boundary
+    url: '/timeline-new-events?boundary=' + boundary + '&lastBinaryClass=' + lastBinaryClass
   }).done(function(data) {
     var allowedMaxScrollPosition = $(window).height() / 3;
     var scrollPosition = $(window).scrollTop();

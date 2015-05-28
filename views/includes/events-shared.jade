@@ -10,27 +10,29 @@ mixin replyLink(event)
 
 mixin eventMetadata(event)
   .row.small
-    .col-md-6.text-muted
+    .col-md-9.text-muted
       - var formattedDate = (new Date(event.timestamp * 1000)).toLocaleString()
       if event.uri
         a(href=event.uri)= formattedDate
       else
         != formattedDate
-      , 
+      != ', '
       a(href='https://github.com/' + event.repository)= event.repository
-    .col-md-6.text-right
+    .col-md-3.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
       +replyLink(event)
 
-mixin eventItem(event, indent)
+mixin eventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
-  - var columnClass = 'col-md-' + (12 - indent);
+  - var columnClass = 'col-md-' + (width - indent);
   .row.event-item(id='event-' + event._key,
                   data-created-at=event.created_at,
                   data-event-type=event.type,
+                  data-event-binary=binaryClass,
                   title=event.title + ' by ' + event.author,
-                  class='author-class-' + event.author_class)
+                  class='author-class-' + event.author_class,
+                  class='event-binary-' + binaryClass)
     if indent
       div(class=paddingClass)
     div(class=columnClass)

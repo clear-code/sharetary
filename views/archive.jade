@@ -9,13 +9,18 @@ html(lang='ja')
 
       include ./includes/events-shared.jade
 
+      - var fullWidth = 12;
+
       mixin eventItemTree(event, level)
-        +eventItem(event, level)
+        +eventItem(event, fullWidth, level)
         if tree && event.descendants
           each descendantEvent in event.descendants
             +eventItemTree(descendantEvent, level + 1)
 
+      - var eventItemBinaryClass = 'odd';
+
       each event in events
-        +eventItemTree(event, 0)
+        +eventItemTree(event, 0, 0, eventItemBinaryClass)
+        - eventItemBinaryClass = eventItemBinaryClass == 'odd' ? 'even' : 'odd' ;
 
     include ./includes/foot.jade

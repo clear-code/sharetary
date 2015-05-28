@@ -9,9 +9,13 @@ html(lang='ja')
 
       include ./includes/events-shared.jade
 
-      #events
+      - var halfWidth = 6;
+      - var eventItemBinaryClass = 'odd';
+
+      #events.compact-events-view
         each event in events
-          +eventItem(event, 0)
+          +eventItem(event, halfWidth, 0, eventItemBinaryClass)
+          - eventItemBinaryClass = eventItemBinaryClass == 'odd' ? 'even' : 'odd' ;
 
     script(type='text/javascript', src='/timeline.js')
     include ./includes/foot.jade
