@@ -17,7 +17,8 @@ mixin eventMetadata(event)
       else
         != formattedDate
       != ', '
-      a(href=current + '?repository=' + event.repository)= event.repository
+      - var authorsFilter = filters.authors ? '&authors=' + filters.authors : '' ;
+      a(href=current + '?repository=' + event.repository + authorsFilter)= event.repository
     .col-md-3.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
@@ -39,7 +40,8 @@ mixin eventItem(event, width, indent, binaryClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
           p
-            a(href=current + '?authors=' + event.author)
+            - var repositoryFilter = filters.repository ? '&repository=' + filters.repository : '' ;
+            a(href=current + '?authors=' + event.author + repositoryFilter)
               img(src=event.author_icon, class='author-icon')
             != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
           +eventMetadata(event)

@@ -14,8 +14,14 @@ function checkNewEvents() {
   var latestItem = $('.event-item').first();
   var boundary = latestItem.attr('data-created-at');
   var lastBinaryClass = latestItem.attr('data-event-binary');
+  var parameters = [
+    'boundary=' + boundary,
+    'lastBinaryClass=' + lastBinaryClass,
+    'authors=' + filters.authors,
+    'repository=' + filters.repository
+  ];
   $.ajax({
-    url: '/timeline-new-events?boundary=' + boundary + '&lastBinaryClass=' + lastBinaryClass
+    url: '/timeline-new-events?' + parameters.join('&')
   }).done(function(data) {
     var allowedMaxScrollPosition = $(window).height() / 3;
     var scrollPosition = $(window).scrollTop();
