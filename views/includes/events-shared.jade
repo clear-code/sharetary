@@ -1,21 +1,3 @@
-mixin eventLabel(event)
-  if event.title && event.author
-    != event.title
-    span.text-muted= ', by ' + event.author
-  else if event.title
-    != event.title
-  else if event.author
-    span.text-muted= 'by ' + event.author
-  else
-    != event.uri
-
-mixin eventLink(event)
-  if event.uri
-    a(href=event.uri)
-      +eventLabel(event)
-  else
-    +eventLabel(event)
-
 mixin replyLink(event)
   if event.reply_uri
     a(href=event.reply_uri)
