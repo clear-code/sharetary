@@ -17,7 +17,7 @@ function checkNewEvents() {
   var parameters = [
     'boundary=' + boundary,
     'lastBinaryClass=' + lastBinaryClass,
-    'authors=' + $('#filter-authors').attr('value'),
+    'actors=' + $('#filter-actors').attr('value'),
     'scope=' + $('#filter-scope').attr('value')
   ];
   $.ajax({

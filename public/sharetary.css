@@ -86,14 +86,14 @@
                0 0 0.3em #ffe359;
 }
 
-.author-icon {
+.actor-icon {
   float: left;
   margin-right: 0.5em;
   max-width: 32px;
   max-height: 32px;
 }
 
-.author-class-minor {
+.actor-class-minor {
   opacity: 0.65;
   font-size: 90%;
 }

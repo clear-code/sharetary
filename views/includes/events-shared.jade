@@ -17,8 +17,8 @@ mixin eventMetadata(event)
       else
         != formattedDate
       != ', '
-      - var authorsFilter = filters.authors ? '&authors=' + filters.authors : '' ;
-      a(href=current + '?scope=' + event.scope + authorsFilter)= event.scope
+      - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
+      a(href=current + '?scope=' + event.scope + actorsFilter)= event.scope
     .col-md-3.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
@@ -31,8 +31,8 @@ mixin eventItem(event, width, indent, binaryClass)
                   data-created-at=event.created_at,
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
-                  title=event.title + ' by ' + event.author + '\n\n' + event.description,
-                  class='author-class-' + event.author_class,
+                  title=event.title + ' by ' + event.actor + '\n\n' + event.description,
+                  class='actor-class-' + event.actor_class,
                   class='event-class-' + event.class,
                   class='event-binary-' + (binaryClass || 'odd'))
     if indent
@@ -42,7 +42,7 @@ mixin eventItem(event, width, indent, binaryClass)
         .panel-body(data-event-type=event.type)
           p
             - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
-            a(href=current + '?authors=' + event.author + scopeFilter)
-              img(src=event.author_icon, class='author-icon')
+            a(href=current + '?actors=' + event.actor + scopeFilter)
+              img(src=event.actor_icon, class='actor-icon')
             != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
           +eventMetadata(event)
