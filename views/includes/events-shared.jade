@@ -31,7 +31,7 @@ mixin eventItem(event, width, indent, binaryClass)
                   data-created-at=event.created_at,
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
-                  title=event.title + ' by ' + event.author,
+                  title=event.title + ' by ' + event.author + '\n\n' + event.description,
                   class='author-class-' + event.author_class,
                   class='event-class-' + event.class,
                   class='event-binary-' + (binaryClass || 'odd'))
