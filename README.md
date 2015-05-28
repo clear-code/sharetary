@@ -110,3 +110,8 @@ This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14
     
     See also [the example configuration to crawl and load GitHub activities](sample/fluent-plugin-github-activities.conf).
     It includes rules to convert fetched GitHub activities to Sharetary events.
+ 5. Start td-agent.
+    
+    ~~~
+    $ sudo service td-agent start
+    ~~~
