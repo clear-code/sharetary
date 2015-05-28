@@ -29,6 +29,9 @@
     "chai": "*",
     "mocha": "*"
   },
+  "bin": {
+    "sharetary-server": "./bin/sharetary-server"
+  },
   "scripts": {
     "sharetary-server": "./bin/sharetary-server",
     "reset-development-db": "bash ./bin/reset-development-db",

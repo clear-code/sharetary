@@ -9,6 +9,14 @@ This provides ability to watch various "events" stored into a Groonga server, in
  * Archive view - You can watch events statically, with their relations. Related events are visible as a thread.
 
 
+## How to start the server?
+
+    $ npm install sharetary
+    $ sharetary-server
+
+See `sharetary-server --help` for more details.
+
+
 ## How to crawl events?
 
 Sharetary doesn't provide ability to crawl events from sources.
