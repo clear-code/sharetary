@@ -9,7 +9,13 @@ html(lang='ja')
 
       include ./includes/events-shared.jade
 
+      mixin eventItemTree(event, level)
+        +eventItem(event, level)
+        if tree && event.descendants
+          each descendantEvent in event.descendants
+            +eventItemTree(descendantEvent, level + 1)
+
       each event in events
-        +eventItem(event, 0)
+        +eventItemTree(event, 0)
 
     include ./includes/foot.jade
