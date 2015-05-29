@@ -1,7 +1,7 @@
 {
   "name": "sharetary",
   "description": "Archives any topic about a technical conference and provides a cross-origin timeline view in real time.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "ClearCode Inc.<info@clear-code.com>",
   "contributors": [
     {
