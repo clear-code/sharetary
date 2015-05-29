@@ -1,6 +1,6 @@
 load --table Events
 [
-["_key","type","title","description","uri","author","timestamp","created_at","parent"],
+["_key","type","title","description","uri","actor","timestamp","created_at","parent"],
 ["event0","test","Groonga, the Initial Event","Groonga is a fast full text search engine!","http://www.clear-code.com/","ClearCode Inc.",0.0,0.0,""],
 ["event1","test","Droonga, the Second Event","Droonga is a distributed data processing system!","http://www.clear-code.com/","ClearCode Inc.",1.0,1.0,""],
 ["event2","test","PGroonga","PGroonga is a plugin for PostgreSQL.","http://www.clear-code.com/","ClearCode Inc.",2.0,2.0,""],
