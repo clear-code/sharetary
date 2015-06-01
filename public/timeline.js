@@ -1,14 +1,38 @@
-function getElementsHeight(collection) {
+function getElementHeights(collection) {
+  var heights = [];
+  collection.each(function(index, element) {
   try {
-    var firstItemPosition = collection.first().offset().top;
-    var lastItemPosition = collection.last().offset().top;
-    var lastItemHeight = collection.last().height();
-    return lastItemPosition + lastItemHeight - firstItemPosition;
+    heights.push($(element).height());
   }
   catch(error) {
-    return -1;
+    heights.push(-1);
+  }
+  });
+  return heights;
+}
+
+showNewEvent.events = [];
+showNewEvent.running = false;
+function showNewEvent() {
+  if (showNewEvent.events.length == 0) {
+    showNewEvent.running = false;
+    return;
+  }
+
+  showNewEvent.running = true;
+  var event = showNewEvent.events.shift();
+  $(event.event).animate({ height: 'show', opacity: 'show' }, 'normal', showNewEvent);
+
+  var allowedMaxScrollPosition = $(window).height() / 3;
+  var scrollPosition = $(window).scrollTop();
+  if (event.height > -1 &&
+      scrollPosition > allowedMaxScrollPosition) {
+      console.log('Scroll');
+    $("html, body").animate({ scrollTop: scrollPosition + event.height }, 'normal');
   }
 }
+
+jQuery.fn.reverse = [].reverse;
 
 function checkNewEvents() {
   var latestItem = $('.event-item').first();
@@ -23,9 +47,6 @@ function checkNewEvents() {
   $.ajax({
     url: '/timeline-new-events?' + parameters.join('&')
   }).done(function(data) {
-    var allowedMaxScrollPosition = $(window).height() / 3;
-    var scrollPosition = $(window).scrollTop();
-
     var newEvents = $(data);
 
     // 1) Insert events to the document to determine their size.
@@ -34,16 +55,20 @@ function checkNewEvents() {
 
     setTimeout(function() {
       // 2) Calculate size of inserting events.
-      var insertedEventsHeight = getElementsHeight(newEvents);
+      var insertedEventHeights = getElementHeights(newEvents).reverse();
 
       // 3) Move inserting events to the top of existing events.
       newEvents.css({ visibility: 'visible', display: 'none' });
       $('#events').prepend(newEvents);
 
-      newEvents.animate({ height: 'show', opacity: 'show' }, 'normal');
-      if (insertedEventsHeight > -1 &&
-          scrollPosition > allowedMaxScrollPosition)
-        $("html, body").animate({ scrollTop: scrollPosition + insertedEventsHeight }, 'normal');
+      newEvents.reverse().each(function(index, event) {
+        showNewEvent.events.push({
+          event:  event,
+          height: insertedEventHeights[index]
+        });
+      });
+      if (!showNewEvent.running)
+        showNewEvent();
 
       setTimeout(checkNewEvents, 3000);
     }, 0);
