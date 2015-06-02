@@ -1,11 +1,11 @@
 mixin replyLink(event)
   if event.reply_uri
-    a(href=event.reply_uri)
-      span.glyphicon.glyphicon-share-alt(aria-hidden='true', title='Reply on the service')
+    a(href=event.reply_uri, title='Reply on the service')
+      span.glyphicon.glyphicon-share-alt(aria-hidden='true')
       | Reply
     | 
-  a(href='/reply?event=' + event._key + '&from=' + current)
-    span.glyphicon.glyphicon-pencil(aria-hidden='true', title='Add temporary comment')
+  a(href='/reply?event=' + event._key + '&from=' + current, title='Add temporary comment')
+    span.glyphicon.glyphicon-pencil(aria-hidden='true')
     | Comment
 
 mixin eventMetadata(event)
