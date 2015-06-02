@@ -11,9 +11,11 @@ mixin replyLink(event)
 mixin eventMetadata(event)
   .row.small
     .col-md-8.text-muted
-      - var formattedDate = (new Date(event.timestamp * 1000)).toLocaleString()
+      - var date = new Date(event.timestamp * 1000);
       if event.uri
-        a(href=event.uri)= formattedDate
+        a(href=event.uri)
+          != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
+          != ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2)
       else
         != formattedDate
       != ', '
