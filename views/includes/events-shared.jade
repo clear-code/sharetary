@@ -4,7 +4,7 @@ mixin replyLink(event)
       span.glyphicon.glyphicon-share-alt(aria-hidden='true')
       | Reply
     | 
-  a(href='/reply?event=' + event._key + '&from=' + current, title='Add temporary comment')
+  a(href='/reply?event=' + escape(event._key) + '&from=' + current, title='Add temporary comment')
     span.glyphicon.glyphicon-pencil(aria-hidden='true')
     | Comment
 
