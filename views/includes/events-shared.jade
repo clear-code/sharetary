@@ -8,6 +8,10 @@ mixin replyLink(event)
     span.glyphicon.glyphicon-pencil(aria-hidden='true')
     | Comment
 
+mixin formattedDatetime(date)
+  != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
+  != ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2)
+
 mixin eventMetadata(event)
   .row.small
     .col-md-12.text-muted
@@ -20,10 +24,9 @@ mixin eventMetadata(event)
       - var date = new Date(event.timestamp * 1000);
       if event.uri
         a(href=event.uri)
-          != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
-          != ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2)
+          +formattedDatetime(date)
       else
-        != formattedDate
+        +formattedDatetime(date)
       != ', '
       - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
       a(href=current + '?scope=' + event.scope + actorsFilter)
