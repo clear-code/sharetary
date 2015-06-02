@@ -1,16 +1,16 @@
 mixin replyLink(event)
   if event.reply_uri
     a(href=event.reply_uri)
-      span.glyphicon.glyphicon-pencil(aria-hidden='true')
+      span.glyphicon.glyphicon-share-alt(aria-hidden='true', title='Reply on the service')
       | Reply
-  else
-    a(href='/reply?event=' + event._key + '&from=' + current)
-      span.glyphicon.glyphicon-pencil(aria-hidden='true')
-      | Reply
+    | 
+  a(href='/reply?event=' + event._key + '&from=' + current)
+    span.glyphicon.glyphicon-pencil(aria-hidden='true', title='Add temporary comment')
+    | Comment
 
 mixin eventMetadata(event)
   .row.small
-    .col-md-9.text-muted
+    .col-md-8.text-muted
       - var formattedDate = (new Date(event.timestamp * 1000)).toLocaleString()
       if event.uri
         a(href=event.uri)= formattedDate
@@ -22,7 +22,7 @@ mixin eventMetadata(event)
         if event.scope_icon
           img.scope-icon(src=event.scope_icon, alt="")
         != event.scope
-    .col-md-3.text-right
+    .col-md-4.text-right
       if event.parentEvent
         a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
       +replyLink(event)
