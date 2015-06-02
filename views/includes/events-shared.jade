@@ -10,6 +10,12 @@ mixin replyLink(event)
 
 mixin eventMetadata(event)
   .row.small
+    .col-md-12.text-muted
+      if event.uri
+        a(href=event.uri)= event.title
+      else
+        != event.title
+  .row.small
     .col-md-8.text-muted
       - var date = new Date(event.timestamp * 1000);
       if event.uri
