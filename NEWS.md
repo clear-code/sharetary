@@ -1,5 +1,12 @@
 # News
 
+## 0.3.0: 2015-06-02 (planned)
+
+ * General
+   * Missing table definition of sample configuration for fluent-plugin-groonga has been fixed.
+ * Timeline view
+   * Comment link of dynamically inserted items now have correct destination.
+
 ## 0.2.0: 2015-06-02
 
  * General
