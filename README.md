@@ -40,6 +40,8 @@ You simply have to define a table named `Events` with following columns (and loa
  * `scope` (`Text` or `ShortText`):
    Indicates the scope of grouped events.
    For example, events from GitHub activities will belong to any repository, so their repository name is suitable as the scope.
+ * `scope_icon` (`Text` or `ShortText`):
+   URI of the icon for the scope.
  * `title` (`Text` or `ShortText`):
    Short description of each event.
    For example, an event indicating a "push" activity on the GitHub will have its `title` like: "Pushed N commits to the repository".

@@ -4,6 +4,7 @@ table_create --name Events --flags TABLE_HASH_KEY --key_type ShortText
 column_create --table Events --name type --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name class --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name scope --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name scope_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
