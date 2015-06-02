@@ -20,7 +20,7 @@ mixin eventMetadata(event)
       - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
       a(href=current + '?scope=' + event.scope + actorsFilter)
         if event.scope_icon
-          img(src=event.scope_icon, alt="")
+          img.scope-icon(src=event.scope_icon, alt="")
         != event.scope
     .col-md-3.text-right
       if event.parentEvent

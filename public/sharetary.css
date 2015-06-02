@@ -100,3 +100,8 @@
   opacity: 0.65;
   font-size: 90%;
 }
+
+.scope-icon {
+  max-width: 16px;
+  max-height: 16px;
+}
