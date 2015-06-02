@@ -22,9 +22,9 @@ mixin filtersDialog
               input#filter-scope.form-control(name='scope', value=filters.scope || '', placeholder='Scope of events')
             p.input-group
               != 'From '
-              input#filter-after(type='number', name='after', value=filters.after)
+              input#filter-after(type='number', name='after', value=filters.after, placeholder='Oldest timestamp in unixtime (UTC)')
               != ' to '
-              input#filter-before(type='number', name='before', value=filters.before)
+              input#filter-before(type='number', name='before', value=filters.before, placeholder='Latest timestamp in unixtime (UTC)')
           .modal-footer
             a.btn.btn-default(href=current) Clear
             input.btn.btn-primary(type='submit', value='Apply')
