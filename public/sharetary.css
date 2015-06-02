@@ -7,6 +7,14 @@
   margin-top: -60px;
 }
 
+/* ignore mouse events on the "row" element because it can cover links in previous event item */
+.event-item {
+  pointer-events: none;
+}
+.event-item .panel {
+  pointer-events: auto;
+}
+
 .event-item .panel,
 .event-item .panel-body,
 .event-item .panel-body p {
