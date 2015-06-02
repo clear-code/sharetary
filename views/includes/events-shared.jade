@@ -45,7 +45,7 @@ mixin eventItem(event, width, indent, binaryClass)
             - var actorLink = current + '?actors=' + event.actor + scopeFilter;
             if event.actor_icon
               a.actor.actor-icon(href=actorLink, title=event.actor)
-                img(src=event.actor_icon)
+                img(src=event.actor_icon, alt=event.actor)
             else
               a.actor(href=actorLink, title=event.actor)
                 != event.actor + ':'
