@@ -35,13 +35,13 @@ mixin eventMetadata(event)
         != event.scope
     .col-md-4.text-right
       if event.parentEvent
-        a(href='#event-' + event.parentEvent._key)= '\u203A ' + event.parentEvent.title + ', '
+        a(href='#event-' + escape(event.parentEvent._key))= '\u203A ' + event.parentEvent.title + ', '
       +replyLink(event)
 
 mixin eventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
   - var columnClass = 'col-md-' + (width - indent);
-  .row.event-item(id='event-' + event._key,
+  .row.event-item(id='event-' + escape(event._key),
                   data-created-at=event.created_at,
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
