@@ -1,10 +1,10 @@
 .compact-events-view .event-binary-even > *[class^="col-md-"] {
   float: right;
-  margin-bottom: -50px;
+  margin-bottom: -60px;
 }
 
 .compact-events-view .event-binary-even:not(:first-child) > *[class^="col-md-"] {
-  margin-top: -50px;
+  margin-top: -60px;
 }
 
 .event-item .panel,
