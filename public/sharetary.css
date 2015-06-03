@@ -1,3 +1,4 @@
+@media (min-width: 992px) {
 .compact-events-view .event-binary-even > *[class^="col-md-"] {
   float: right;
   margin-bottom: -60px;
@@ -5,6 +6,7 @@
 
 .compact-events-view .event-binary-even:not(:first-child) > *[class^="col-md-"] {
   margin-top: -60px;
+}
 }
 
 /* ignore mouse events on the "row" element because it can cover links in previous event item */
