@@ -42,6 +42,10 @@
   font-size: small;
 }
 
+.event-item.event-class-minor .panel-body {
+  padding: 10px;
+}
+
 .event-item .panel::before {
   content: attr(data-event-type);
   font-size: 60px;
