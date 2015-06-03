@@ -126,6 +126,11 @@
   max-height: 16px;
 }
 
+.reply-link-label,
+.comment-link-label {
+  display: none;
+}
+
 .event-item ul {
   margin: 0;
   padding: 0;

@@ -1,12 +1,14 @@
 mixin replyLink(event)
   a(href=event.reply_uri, title='Reply on the service')
     span.glyphicon.glyphicon-share-alt(aria-hidden='true')
-    | Reply
+    span.reply-link-label
+      Reply
 
 mixin commentLink(event)
   a(href='/reply?event=' + encodeURIComponent(event._key) + '&from=' + current, title='Add temporary comment')
     span.glyphicon.glyphicon-pencil(aria-hidden='true')
-    | Comment
+    span.comment-link-label
+      Comment
 
 mixin formattedDatetime(date)
   != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
