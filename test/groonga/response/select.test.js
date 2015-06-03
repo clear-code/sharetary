@@ -3,6 +3,7 @@ var assert = require('chai').assert;
 var SelectResponse = require('../../../lib/groonga/response/select');
 
 suite('Groonga response for select', function() {
+  suite('Regular result', function() {
   var source = [
     [0, 1431504631.3374963, 0.0036923885345458984],
     [
@@ -66,6 +67,25 @@ suite('Groonga response for select', function() {
        ]}
     ];
     assert.deepEqual(actual, expected);
+  });
+  });
+
+  suite('blank result', function() {
+    var source = [
+      [0, 1431504631.3374963, 0.0036923885345458984],
+      []
+    ];
+
+    test('count', function() {
+      var response = new SelectResponse(source);
+      assert.equal(response.count, 0);
+    });
+
+    test('records', function() {
+      var response = new SelectResponse(source);
+      var expected = [];
+      assert.deepEqual(response.records, expected);
+    });
   });
 });
 
