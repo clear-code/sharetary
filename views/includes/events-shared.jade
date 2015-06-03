@@ -1,9 +1,9 @@
 mixin replyLink(event)
-  if event.reply_uri
-    a(href=event.reply_uri, title='Reply on the service')
-      span.glyphicon.glyphicon-share-alt(aria-hidden='true')
-      | Reply
-    | 
+  a(href=event.reply_uri, title='Reply on the service')
+    span.glyphicon.glyphicon-share-alt(aria-hidden='true')
+    | Reply
+
+mixin commentLink(event)
   a(href='/reply?event=' + encodeURIComponent(event._key) + '&from=' + current, title='Add temporary comment')
     span.glyphicon.glyphicon-pencil(aria-hidden='true')
     | Comment
@@ -62,7 +62,10 @@ mixin compactEventFooter(event)
       if event.parentEvent
         +eventParent(event)
         != ', '
-      +replyLink(event)
+      if event.reply_uri
+        +replyLink(event)
+        | 
+      +commentLink(event)
 
 mixin compactEventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
@@ -100,9 +103,9 @@ mixin eventItem(event, width, indent, binaryClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
           .row
-            .col-md-10
+            .col-md-9
               +eventBody(event)
-            .col-md-2.small
+            .col-md-3.small
               p.text-muted
                 ul
                   li
@@ -114,5 +117,8 @@ mixin eventItem(event, width, indent, binaryClass)
                   if event.parentEvent
                     li
                       +eventParent(event)
+                  if event.reply_uri
+                    li
+                      +replyLink(event)
                   li
-                    +replyLink(event)
+                    +commentLink(event)
