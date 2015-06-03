@@ -40,7 +40,7 @@ You simply have to define a table named `Events` with following columns (and loa
    For example, an event indicating a "push" activity on the GitHub will have the string `push` as its `type`.
  * `class` (`Text` or `ShortText`):
    Indicates the magnitude of each event.
-   Three possible values: `important`, `major`, and `minor`.
+   Three possible values: `important`, `major`, `normal`, and `minor`.
    `important` and `major` events will be highlighted in the view.
  * `scope` (`Text` or `ShortText`):
    Indicates the scope of grouped events.
@@ -71,7 +71,7 @@ You simply have to define a table named `Events` with following columns (and loa
    URI of the icon for the actor.
  * `actor_class` (`Text` or `ShortText`):
    Indicates the magnitude of the actor.
-   Two possible values: `major`, and `minor`.
+   Two possible values: `major`, `normal`, and `minor`.
    Events triggered by `minor` actors will be shown with small text and lighter color in the view.
    For example, if you have events triggered by both students and teachers and you hope to see students' events mainly, then students are `major` and teachers are `minor`.
  * `timestamp` (`Time'):

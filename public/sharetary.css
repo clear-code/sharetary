@@ -61,6 +61,9 @@
 .timeline-view .event-class-minor .panel {
 }
 
+.timeline-view .event-class-normal .panel {
+}
+
 .timeline-view .event-class-major .panel {
   background: #f3ffd8; /* Old browsers */
   background: -moz-linear-gradient(top,  #f3ffd8 0%, #d1ff99 50%, #a0f78f 100%); /* FF3.6+ */
@@ -84,6 +87,9 @@
 }
 
 .archive-view .event-class-minor .panel {
+}
+
+.archive-view .event-class-normal .panel {
 }
 
 .archive-view .event-class-major .panel {
