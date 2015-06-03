@@ -29,7 +29,7 @@ mixin eventTitle(event)
 
 mixin eventScope(event)
   - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
-  a(href=current + '?scope=' + event.scope + actorsFilter)
+  a(href=current + '?scope=' + event.scope + actorsFilter, title="Show only same scope events")
     if event.scope_icon
       img.scope-icon(src=event.scope_icon, alt="")
     != event.scope
