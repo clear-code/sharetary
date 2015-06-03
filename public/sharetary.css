@@ -59,6 +59,7 @@
 }
 
 .timeline-view .event-class-minor .panel {
+  font-size: smaller;
 }
 
 .timeline-view .event-class-normal .panel {
@@ -87,6 +88,7 @@
 }
 
 .archive-view .event-class-minor .panel {
+  font-size: smaller;
 }
 
 .archive-view .event-class-normal .panel {
@@ -149,7 +151,7 @@
 
 .actor-class-minor {
   opacity: 0.65;
-  font-size: 90%;
+  font-size: smaller;
 }
 
 .source-icon, .scope-icon {
