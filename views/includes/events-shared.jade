@@ -6,7 +6,7 @@ mixin replyLink(event)
 
 mixin commentLink(event)
   a(href='/reply?event=' + encodeURIComponent(event._key) + '&from=' + current, title='Add temporary comment')
-    span.glyphicon.glyphicon-pencil(aria-hidden='true')
+    span.glyphicon.glyphicon-comment(aria-hidden='true')
     span.comment-link-label
       Comment
 
@@ -17,26 +17,31 @@ mixin formattedDatetime(date)
 mixin eventDate(event)
   - var date = new Date(event.timestamp * 1000);
   if event.uri
-    a(href=event.uri)
+    a(href=event.uri, title='Jump to the origin')
       if event.source_icon
         img.source-icon(src=event.source_icon, alt="")
+      else
+        span.glyphicon.glyphicon-globe(aria-hidden='true')
       +formattedDatetime(date)
   else
     +formattedDatetime(date)
 
 mixin eventTitle(event)
-  a(href='#event-' + encodeURIComponent(event._key), onclick='scrollToEvent(this)')= event.title
+  a(href='#event-' + encodeURIComponent(event._key), onclick='scrollToEvent(this)', title='Jump to here')
+    span.glyphicon.glyphicon-pushpin(aria-hidden='true')
+    != event.title
 
 mixin eventScope(event)
   - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
-  a(href=current + '?scope=' + event.scope + actorsFilter, title="Show only same scope events")
+  a(href=current + '?scope=' + event.scope + actorsFilter, title='Show only same scope events')
+    span.glyphicon.glyphicon-filter(aria-hidden='true')
     if event.scope_icon
       img.scope-icon(src=event.scope_icon, alt="")
     != event.scope
 
 mixin eventParent(event)
   if event.parentEvent
-    a(href='#event-' + encodeURIComponent(event.parentEvent._key), onclick='scrollToEvent(this)')
+    a(href='#event-' + encodeURIComponent(event.parentEvent._key), onclick='scrollToEvent(this)', title=event.parentEvent.title)
       span.glyphicon.glyphicon-arrow-up(aria-hidden='true')
       span.parent-link-label
         Parent Event
