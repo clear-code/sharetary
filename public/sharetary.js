@@ -10,7 +10,7 @@ function scrollToEvent(link) {
     scrollToTarget(id);
 }
 
-$(function() {
+$(document).load(function() {
   var id = location.hash.substr(1);
   if (id)
     scrollToTarget(id);
