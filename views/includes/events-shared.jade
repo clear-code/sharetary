@@ -36,7 +36,10 @@ mixin eventScope(event)
 
 mixin eventParent(event)
   if event.parentEvent
-    a(href='#event-' + encodeURIComponent(event.parentEvent._key), onclick='scrollToEvent(this)')= '\u203A ' + event.parentEvent.title
+    a(href='#event-' + encodeURIComponent(event.parentEvent._key), onclick='scrollToEvent(this)')
+      span.glyphicon.glyphicon-arrow-up(aria-hidden='true')
+      span.parent-link-label
+        Parent Event
 
 mixin eventActor(event)
   - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;

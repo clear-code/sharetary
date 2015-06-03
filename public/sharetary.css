@@ -152,7 +152,8 @@
 }
 
 .reply-link-label,
-.comment-link-label {
+.comment-link-label,
+.parent-link-label {
   display: none;
 }
 
