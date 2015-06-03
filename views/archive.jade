@@ -12,7 +12,7 @@ html(lang='ja')
       - var fullWidth = 12;
 
       mixin eventItemTree(event, level)
-        +eventItem(event, fullWidth, level)
+        +archiveEventItem(event, fullWidth, level)
         if tree && event.descendants
           each descendantEvent in event.descendants
             +eventItemTree(descendantEvent, level + 1)

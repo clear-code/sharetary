@@ -91,7 +91,7 @@ mixin compactEventItem(event, width, indent, binaryClass)
           +eventBody(event)
           +compactEventFooter(event)
 
-mixin eventItem(event, width, indent, binaryClass)
+mixin archiveEventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
   - var columnClass = 'col-md-' + (width - indent);
   .row.event-item(id='event-' + encodeURIComponent(event._key),
@@ -122,8 +122,3 @@ mixin eventItem(event, width, indent, binaryClass)
                   if event.parentEvent
                     li
                       +eventParent(event)
-                  if event.reply_uri
-                    li
-                      +replyLink(event)
-                  li
-                    +commentLink(event)
