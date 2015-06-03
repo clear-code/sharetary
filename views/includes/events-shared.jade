@@ -11,10 +11,12 @@ mixin commentLink(event)
       Comment
 
 mixin formattedDatetimeOnClient(event)
+  span(id='event-timestamp-' + encodeURIComponent(event._key))
   script(type='text/javascript')
     | (function() {
     != 'var date = new Date(' + event.timestamp + ' * 1000);'
-    |   document.write(formattedDatetime(date));
+    != 'var slot = document.getElementById("' + 'event-timestamp-' + encodeURIComponent(event._key) + '");'
+    |   slot.appendChild(formattedDatetime(date));
     | })();
 
 mixin eventDate(event)
