@@ -17,16 +17,24 @@
   pointer-events: auto;
 }
 
+.timeline-view .event-item .panel,
+.timeline-view .event-item .panel-body,
+.timeline-view .event-item .panel-body p {
+  overflow: hidden;
+}
+
+.timeline-view .event-item .panel-body p {
+  max-height: 6.5em;
+}
+
 .event-item .panel,
 .event-item .panel-body,
 .event-item .panel-body p {
   position: relative;
-  overflow: hidden;
 }
 
 .event-item .panel-body p {
   font-size: large;
-  max-height: 6.5em;
   white-space: pre-wrap;
 }
 
