@@ -71,11 +71,11 @@ mixin compactEventFooter(event)
     .col-md-12.text-muted
       +eventTitle(event)
   .row.small
-    .col-md-8.text-muted
+    .col-md-10.text-muted
       +eventDate(event)
       != ', '
       +eventScope(event)
-    .col-md-4.text-right
+    .col-md-2.text-right
       if event.parentEvent
         +eventParent(event)
         | 
