@@ -16,7 +16,8 @@ mixin formattedDatetimeOnClient(event)
     | (function() {
     != 'var date = new Date(' + event.timestamp + ' * 1000);'
     != 'var slot = document.getElementById("' + 'event-timestamp-' + encodeURIComponent(event._key) + '");'
-    |   slot.appendChild(formattedDatetime(date));
+    |   if (slot)
+    |     slot.textContent = formattedDatetime(date);
     | })();
 
 mixin eventDate(event)
