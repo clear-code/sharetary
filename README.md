@@ -11,7 +11,7 @@ This provides ability to watch various "events" stored into a Groonga server, in
 
 ## How to start the server?
 
-    $ npm install sharetary
+    $ sudo npm install -g sharetary
     $ sharetary-server
 
 You must install Node.js and npm before installation.
