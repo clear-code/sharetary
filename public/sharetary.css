@@ -172,8 +172,8 @@
 }
 
 .source-icon, .scope-icon {
-  max-width: 16px;
-  max-height: 16px;
+  max-width: 1.5em;
+  max-height: 1.5em;
 }
 
 .reply-link-label,
