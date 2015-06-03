@@ -37,8 +37,8 @@ mixin eventParent(event)
   if event.parentEvent
     a(href='#event-' + encodeURIComponent(event.parentEvent._key))= '\u203A ' + event.parentEvent.title
 
-mixin eventBody(event)
-  p
+mixin eventDescription(event)
+  p.description
     - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
     - var actorLink = current + '?actors=' + event.actor + scopeFilter;
     if event.actor_icon
@@ -83,7 +83,7 @@ mixin compactEventItem(event, width, indent, binaryClass)
     div(class=columnClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
-          +eventBody(event)
+          +eventDescription(event)
           +compactEventFooter(event)
 
 mixin eventItem(event, width, indent, binaryClass)
@@ -104,7 +104,7 @@ mixin eventItem(event, width, indent, binaryClass)
         .panel-body(data-event-type=event.type)
           .row
             .col-md-9
-              +eventBody(event)
+              +eventDescription(event)
             .col-md-3.small
               p.text-muted
                 ul

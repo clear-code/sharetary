@@ -17,11 +17,12 @@
   pointer-events: auto;
 }
 
-.timeline-view .event-item .panel-body p {
+.timeline-view .event-item .panel-body p.description {
   max-height: 6.5em;
 }
 
-.archive-view .event-item .panel-body p {
+.archive-view .event-item .panel-body p.description {
+  font-family: monospace;
   max-height: 13em;
 }
 
