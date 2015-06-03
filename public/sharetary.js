@@ -11,7 +11,7 @@ function scrollToEvent(link) {
 }
 
 $(document).load(function() {
-  var id = location.hash.substr(1);
+  var id = encodeURIComponent(location.hash.substr(1));
   if (id)
     scrollToTarget(id);
 });
