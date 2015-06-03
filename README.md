@@ -55,6 +55,9 @@ You simply have to define a table named `Events` with following columns (and loa
    For example, an event indicating a "commit" activity on the GitHub will have its commit message as its `description`.
  * `uri` (`Text` or `ShortText`):
    The related URI of each event.
+ * `source_icon` (`Text` or `ShortText`):
+   URI of the icon for the source of the event.
+   For example, events from Github activities will have favicon's URI as its `soruce_icon`.
  * `reply_uri` (`Text` or `ShortText`):
    The URI of an UI to post any reply for each event.
    For example, an event indicating a "commit" activity on the GitHub will have link to the comment form of the commit as its `reply_uri`.

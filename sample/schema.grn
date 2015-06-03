@@ -8,6 +8,7 @@ column_create --table Events --name scope_icon --flags COLUMN_SCALAR --type Shor
 column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name source_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name reply_uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name actor --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name actor_uri --flags COLUMN_SCALAR --type ShortText
