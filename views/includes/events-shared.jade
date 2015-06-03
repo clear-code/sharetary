@@ -10,21 +10,23 @@ mixin commentLink(event)
     span.comment-link-label
       Comment
 
-mixin formattedDatetime(date)
-  != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
-  != ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2)
+mixin formattedDatetimeOnClient(event)
+  script(type='text/javascript')
+    | (function() {
+    != 'var date = new Date(' + event.timestamp + ' * 1000);'
+    |   document.write(formattedDatetime(date));
+    | })();
 
 mixin eventDate(event)
-  - var date = new Date(event.timestamp * 1000);
   if event.uri
     a(href=event.uri, title='Jump to the origin')
       if event.source_icon
         img.source-icon(src=event.source_icon, alt="")
       else
         span.glyphicon.glyphicon-globe(aria-hidden='true')
-      +formattedDatetime(date)
+      +formattedDatetimeOnClient(event)
   else
-    +formattedDatetime(date)
+    +formattedDatetimeOnClient(event)
 
 mixin eventTitle(event)
   a(href='#event-' + encodeURIComponent(event._key), onclick='scrollToEvent(this)', title='Jump to here')
