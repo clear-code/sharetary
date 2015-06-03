@@ -6,6 +6,7 @@
    * Missing table definition of sample configuration for fluent-plugin-groonga has been fixed.
  * Timeline view
    * Comment link of dynamically inserted items now have correct destination.
+   * Rightside column items are shrunken only when the screen is wider than 992px.
 
 ## 0.2.0: 2015-06-02
 
