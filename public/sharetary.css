@@ -57,6 +57,9 @@
   max-width: 8em;
   z-index: 5;
 }
+.event-item.event-class-minor .panel::before {
+  font-size: 30px;
+}
 
 .event-item .panel-body {
   z-index: 10;
@@ -153,6 +156,7 @@
   max-height: 64px;
 }
 
+.event-class-minor .actor-icon img,
 .actor-class-minor .actor-icon img {
   max-width: 32px;
   max-height: 32px;
