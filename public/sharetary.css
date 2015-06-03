@@ -38,6 +38,10 @@
   white-space: pre-wrap;
 }
 
+.event-item.event-class-minor .panel-body p {
+  font-size: normal;
+}
+
 .event-item .panel::before {
   content: attr(data-event-type);
   font-size: 60px;
