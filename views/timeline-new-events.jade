@@ -3,4 +3,4 @@ include ./includes/events-shared.jade
 - var halfWidth = 6;
 
 each event in events
-  +eventItem(event, halfWidth, 0, event._binaryClass)
+  +compactEventItem(event, halfWidth, 0, event._binaryClass)

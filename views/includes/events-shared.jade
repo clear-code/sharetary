@@ -4,7 +4,7 @@ mixin replyLink(event)
       span.glyphicon.glyphicon-share-alt(aria-hidden='true')
       | Reply
     | 
-  a(href='/reply?event=' + escape(event._key) + '&from=' + current, title='Add temporary comment')
+  a(href='/reply?event=' + encodeURIComponent(event._key) + '&from=' + current, title='Add temporary comment')
     span.glyphicon.glyphicon-pencil(aria-hidden='true')
     | Comment
 
@@ -12,36 +12,62 @@ mixin formattedDatetime(date)
   != date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2) + ' '
   != ('0' + date.getHours()).substr(-2) + ':' + ('0' + date.getMinutes()).substr(-2) + ':' + ('0' + date.getSeconds()).substr(-2)
 
-mixin eventMetadata(event)
+mixin eventDate(event)
+  - var date = new Date(event.timestamp * 1000);
+  if event.uri
+    a(href=event.uri)
+      +formattedDatetime(date)
+  else
+    +formattedDatetime(date)
+
+mixin eventTitle(event)
+  if event.uri
+    a(href=event.uri)= event.title
+  else
+    != event.title
+
+mixin eventScope(event)
+  - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
+  a(href=current + '?scope=' + event.scope + actorsFilter)
+    if event.scope_icon
+      img.scope-icon(src=event.scope_icon, alt="")
+    != event.scope
+
+mixin eventParent(event)
+  if event.parentEvent
+    a(href='#event-' + encodeURIComponent(event.parentEvent._key))= '\u203A ' + event.parentEvent.title
+
+mixin eventBody(event)
+  p
+    - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
+    - var actorLink = current + '?actors=' + event.actor + scopeFilter;
+    if event.actor_icon
+      a.actor.actor-icon(href=actorLink, title=event.actor)
+        img(src=event.actor_icon, alt=event.actor)
+    else
+      a.actor(href=actorLink, title=event.actor)
+        != event.actor + ':'
+    != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
+
+mixin compactEventFooter(event)
   .row.small
     .col-md-12.text-muted
-      if event.uri
-        a(href=event.uri)= event.title
-      else
-        != event.title
+      +eventTitle(event)
   .row.small
     .col-md-8.text-muted
-      - var date = new Date(event.timestamp * 1000);
-      if event.uri
-        a(href=event.uri)
-          +formattedDatetime(date)
-      else
-        +formattedDatetime(date)
+      +eventDate(event)
       != ', '
-      - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
-      a(href=current + '?scope=' + event.scope + actorsFilter)
-        if event.scope_icon
-          img.scope-icon(src=event.scope_icon, alt="")
-        != event.scope
+      +eventScope(event)
     .col-md-4.text-right
       if event.parentEvent
-        a(href='#event-' + escape(event.parentEvent._key))= '\u203A ' + event.parentEvent.title + ', '
+        +eventParent(event)
+        != ', '
       +replyLink(event)
 
-mixin eventItem(event, width, indent, binaryClass)
+mixin compactEventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
   - var columnClass = 'col-md-' + (width - indent);
-  .row.event-item(id='event-' + escape(event._key),
+  .row.event-item(id='event-' + encodeURIComponent(event._key),
                   data-created-at=event.created_at,
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
@@ -54,14 +80,39 @@ mixin eventItem(event, width, indent, binaryClass)
     div(class=columnClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
-          p
-            - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
-            - var actorLink = current + '?actors=' + event.actor + scopeFilter;
-            if event.actor_icon
-              a.actor.actor-icon(href=actorLink, title=event.actor)
-                img(src=event.actor_icon, alt=event.actor)
-            else
-              a.actor(href=actorLink, title=event.actor)
-                != event.actor + ':'
-            != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
-          +eventMetadata(event)
+          +eventBody(event)
+          +compactEventFooter(event)
+
+mixin eventItem(event, width, indent, binaryClass)
+  - var paddingClass = 'col-md-' + indent;
+  - var columnClass = 'col-md-' + (width - indent);
+  .row.event-item(id='event-' + encodeURIComponent(event._key),
+                  data-created-at=event.created_at,
+                  data-event-type=event.type,
+                  data-event-binary=binaryClass || 'odd',
+                  title=event.title + ' by ' + event.actor + '\n\n' + event.description,
+                  class='actor-class-' + event.actor_class,
+                  class='event-class-' + event.class,
+                  class='event-binary-' + (binaryClass || 'odd'))
+    if indent
+      div(class=paddingClass)
+    div(class=columnClass)
+      .panel.panel-default(data-event-type=event.type)
+        .panel-body(data-event-type=event.type)
+          .row
+            .col-md-10
+              +eventBody(event)
+            .col-md-2.small
+              p.text-muted
+                ul
+                  li
+                    +eventTitle(event)
+                  li
+                    +eventDate(event)
+                  li
+                    +eventScope(event)
+                  if event.parentEvent
+                    li
+                      +eventParent(event)
+                  li
+                    +replyLink(event)
