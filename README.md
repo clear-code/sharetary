@@ -14,6 +14,11 @@ This provides ability to watch various "events" stored into a Groonga server, in
     $ npm install sharetary
     $ sharetary-server
 
+You must install Node.js and npm before installation.
+For example, on Ubuntu 14.04LTS:
+
+    $ sudo apt-get install nodejs nodejs-legacy npm
+
 See `sharetary-server --help` for more details.
 
 
