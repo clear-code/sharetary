@@ -37,16 +37,19 @@ mixin eventParent(event)
   if event.parentEvent
     a(href='#event-' + encodeURIComponent(event.parentEvent._key))= '\u203A ' + event.parentEvent.title
 
-mixin eventDescription(event)
+mixin eventActor(event)
+  - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
+  - var actorLink = event.actor_uri ? event.actor_uri : current + '?actors=' + event.actor + scopeFilter;
+  if event.actor_icon
+    a.actor.actor-icon(href=actorLink, title=event.actor)
+      img(src=event.actor_icon, alt=event.actor)
+  else
+    a.actor(href=actorLink, title=event.actor)
+      != event.actor + ':'
+
+mixin eventBody(event)
   p.description
-    - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
-    - var actorLink = current + '?actors=' + event.actor + scopeFilter;
-    if event.actor_icon
-      a.actor.actor-icon(href=actorLink, title=event.actor)
-        img(src=event.actor_icon, alt=event.actor)
-    else
-      a.actor(href=actorLink, title=event.actor)
-        != event.actor + ':'
+    +eventActor(event)
     != event.description.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;')
 
 mixin compactEventFooter(event)
@@ -83,7 +86,7 @@ mixin compactEventItem(event, width, indent, binaryClass)
     div(class=columnClass)
       .panel.panel-default(data-event-type=event.type)
         .panel-body(data-event-type=event.type)
-          +eventDescription(event)
+          +eventBody(event)
           +compactEventFooter(event)
 
 mixin eventItem(event, width, indent, binaryClass)
@@ -104,7 +107,7 @@ mixin eventItem(event, width, indent, binaryClass)
         .panel-body(data-event-type=event.type)
           .row
             .col-md-9
-              +eventDescription(event)
+              +eventBody(event)
             .col-md-3.small
               p.text-muted
                 ul
