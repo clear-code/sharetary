@@ -39,7 +39,7 @@
 }
 
 .event-item.event-class-minor .panel-body p {
-  font-size: normal;
+  font-size: small;
 }
 
 .event-item .panel::before {
@@ -151,6 +151,11 @@
 .actor-icon img {
   max-width: 64px;
   max-height: 64px;
+}
+
+.actor-class-minor .actor-icon img {
+  max-width: 32px;
+  max-height: 32px;
 }
 
 .actor-class-minor {
