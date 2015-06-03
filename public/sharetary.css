@@ -119,7 +119,7 @@
   font-size: 90%;
 }
 
-.scope-icon {
+.source-icon, .scope-icon {
   max-width: 16px;
   max-height: 16px;
 }

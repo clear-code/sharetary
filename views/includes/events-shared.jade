@@ -16,6 +16,8 @@ mixin eventDate(event)
   - var date = new Date(event.timestamp * 1000);
   if event.uri
     a(href=event.uri)
+      if event.source_icon
+        img.source-icon(src=event.source_icon, alt="")
       +formattedDatetime(date)
   else
     +formattedDatetime(date)
