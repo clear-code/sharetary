@@ -118,11 +118,10 @@ mixin archiveEventItem(event, width, indent, binaryClass)
             .col-md-9
               +eventBody(event)
             .col-md-3.small
-              p.text-muted
-                ul
-                  li
-                    +eventTitle(event)
-                  li
-                    +eventDate(event)
-                  li
-                    +eventScope(event)
+              ul
+                li
+                  +eventTitle(event)
+                li
+                  +eventDate(event)
+                li
+                  +eventScope(event)
