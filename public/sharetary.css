@@ -102,8 +102,8 @@
 }
 
 .actor-icon img {
-  max-width: 32px;
-  max-height: 32px;
+  max-width: 64px;
+  max-height: 64px;
 }
 
 .actor-class-minor {
