@@ -102,9 +102,14 @@ This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14
     $ sudo td-agent-gem install fluent-plugin-github-activities
     $ sudo td-agent-gem install fluent-plugin-map
     $ sudo td-agent-gem install fluent-plugin-record-reformer
+    ~~~
+ 4. Install fluent-plugin-groonga. It requires some extra packages.
+    
+    ~~~
+    $ sudo apt-get install ruby ruby-dev build-essential
     $ sudo td-agent-gem install fluent-plugin-groonga
     ~~~
- 4. Configure td-agent.
+ 5. Configure td-agent.
     
     ~~~
     $ sudo vi /etc/td-agent/td-agent.conf
@@ -112,7 +117,7 @@ This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14
     
     See also [the example configuration to crawl and load GitHub activities](sample/fluent-plugin-github-activities.conf).
     It includes rules to convert fetched GitHub activities to Sharetary events.
- 5. Start td-agent.
+ 6. Start td-agent.
     
     ~~~
     $ sudo service td-agent start
