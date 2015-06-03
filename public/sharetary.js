@@ -10,10 +10,8 @@ function scrollToEvent(link) {
     scrollToTarget(id);
 }
 
-$(document).load(function() {
-  setTimeout(function() {
-    var id = encodeURIComponent(location.hash.substr(1));
-    if (id)
-      scrollToTarget(id);
-  }, 0);
+$(function() {
+  var id = encodeURIComponent(location.hash.substr(1));
+  if (id)
+    scrollToTarget(id);
 });
