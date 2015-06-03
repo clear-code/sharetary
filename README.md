@@ -62,6 +62,8 @@ You simply have to define a table named `Events` with following columns (and loa
  * `actor` (`Text` or `ShortText`):
    Indicates the actor's name of each event.
    For example, an events from GitHub activity will have the account id as its `actor`.
+ * `actor_uri` (`Text` or `ShortText`):
+   The related URI of the actor.
  * `actor_icon` (`Text` or `ShortText`):
    URI of the icon for the actor.
  * `actor_class` (`Text` or `ShortText`):

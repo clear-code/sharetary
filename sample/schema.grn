@@ -10,6 +10,7 @@ column_create --table Events --name description --flags COLUMN_SCALAR --type Tex
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name reply_uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name actor --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name actor_uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name actor_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name actor_class --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Time
