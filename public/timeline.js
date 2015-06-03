@@ -75,10 +75,3 @@ function checkNewEvents() {
   });
 }
 checkNewEvents();
-
-function scrollToEvent(link) {
-  var id = link.href.split('#')[1];
-  var item = document.getElementById(id);
-  if (item)
-    $('html, body').animate({ scrollTop: $(item).offset().top }, 'normal');
-}
