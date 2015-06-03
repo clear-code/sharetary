@@ -28,7 +28,7 @@ function showNewEvent() {
   if (event.height > -1 &&
       scrollPosition > allowedMaxScrollPosition) {
       console.log('Scroll');
-    $("html, body").animate({ scrollTop: scrollPosition + event.height }, 'normal');
+    $('html, body').animate({ scrollTop: scrollPosition + event.height }, 'normal');
   }
 }
 
@@ -75,3 +75,10 @@ function checkNewEvents() {
   });
 }
 checkNewEvents();
+
+function scrollToEvent(link) {
+  var id = link.href.split('#')[1];
+  var item = document.getElementById(id);
+  if (item)
+    $('html, body').animate({ scrollTop: $(item).offset().top }, 'normal');
+}
