@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 
 var SelectResponse = require('../../../lib/groonga/response/select');
 
-suite('Groonga response for column_create', function() {
+suite('Groonga response for select', function() {
   var source = [
     [0, 1431504631.3374963, 0.0036923885345458984],
     [
