@@ -68,7 +68,7 @@ mixin compactEventFooter(event)
     .col-md-4.text-right
       if event.parentEvent
         +eventParent(event)
-        != ', '
+        | 
       if event.reply_uri
         +replyLink(event)
         | 
