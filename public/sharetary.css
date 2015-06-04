@@ -144,8 +144,10 @@
 }
 
 .archive-view .event-class-minor .panel {
+  border-color: #F0F0F0;
+  box-shadow: none;
   font-size: smaller;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .archive-view .event-class-normal .panel {
