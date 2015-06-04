@@ -113,6 +113,12 @@
   list-style: none;
 }
 
+.event-item.event-class-minor ul li {
+  display: inline;
+  margin: 0 0.5em 0 0;
+}
+
+
 
 .timeline-view .event-class-minor .panel {
   font-size: smaller;
