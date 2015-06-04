@@ -131,3 +131,8 @@ mixin archiveEventItem(event, width, indent, binaryClass)
                   +eventDate(event)
                 li
                   +eventScope(event)
+                li
+                  if event.reply_uri
+                    +replyLink(event)
+                    | 
+                  +commentLink(event)
