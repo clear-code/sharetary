@@ -63,6 +63,7 @@
 }
 .event-item.event-class-minor .panel::before {
   font-size: 30px;
+  top: 10px;
 }
 
 .event-item .panel-body {
