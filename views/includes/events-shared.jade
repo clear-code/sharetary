@@ -1,5 +1,5 @@
 mixin replyLink(event)
-  a(href=event.reply_uri, title='Reply on the service')
+  a(href=event.reply_uri, target='_blank', title='Reply on the service')
     span.glyphicon.glyphicon-share-alt(aria-hidden='true')
     span.reply-link-label
       Reply
@@ -22,7 +22,7 @@ mixin formattedDatetimeOnClient(event)
 
 mixin eventDate(event)
   if event.uri
-    a(href=event.uri, title='Jump to the origin')
+    a(href=event.uri, target='_blank', title='Jump to the origin')
       if event.source_icon
         img.source-icon(src=event.source_icon, alt="")
       else
@@ -55,10 +55,11 @@ mixin eventParent(event)
 mixin eventActor(event)
   - var scopeFilter = filters.scope ? '&scope=' + filters.scope : '' ;
   - var actorLink = event.actor_uri ? event.actor_uri : current + '?actors=' + event.actor + scopeFilter;
+  - var actorTarget = event.actor_uri ? '_blank' : '' ;
   if event.actor_icon
-    a.actor.actor-icon(href=actorLink, title=event.actor)
+    a.actor.actor-icon(href=actorLink, target=actorTarget, title=event.actor)
       img(src=event.actor_icon, alt=event.actor)
-  else
+  else if event.actor
     a.actor(href=actorLink, title=event.actor)
       != event.actor + ':'
 
