@@ -1,5 +1,11 @@
 # News
 
+## 0.4.0: 2015-06-29 (planned)
+
+ * General
+   * Local comments becomes disabled by default.
+     Now you have to specify `--enable-local-comment` option to activate the UI and endpoint.
+
 ## 0.3.0: 2015-06-06
 
  * General
