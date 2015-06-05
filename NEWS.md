@@ -7,6 +7,9 @@
  * Timeline view
    * Comment link of dynamically inserted items now have correct destination.
    * Rightside column items are shrunken only when the screen is wider than 992px.
+ * Archive view
+   * Minor class events and events of minor class actors are shown with muted visual.
+   * Navigation items in each event are shown in rightside.
 
 ## 0.2.0: 2015-06-02
 
