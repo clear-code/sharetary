@@ -13,8 +13,9 @@ include ./filters.jade
           a(href='/timeline') Timeline view
         li(class=classesForArchive)
           a(href='/archive') Archive view
-        li(class=classesForAdd)
-          a(href='/add') Post
+        if enableLocalComment
+          li(class=classesForAdd)
+            a(href='/add') Post
       if current == '/archive' || current == '/timeline'
         .nav.navbar-nav.navbar-right
           +filtersButton

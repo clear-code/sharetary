@@ -84,7 +84,8 @@ mixin compactEventFooter(event)
       if event.reply_uri
         +replyLink(event)
         | 
-      +commentLink(event)
+      if enableLocalComment
+        +commentLink(event)
 
 mixin compactEventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
@@ -132,8 +133,10 @@ mixin archiveEventItem(event, width, indent, binaryClass)
                   +eventDate(event)
                 li
                   +eventScope(event)
-                li
-                  if event.reply_uri
-                    +replyLink(event)
-                    | 
-                  +commentLink(event)
+                if event.reply_uri || enableLocalComment
+                  li
+                    if event.reply_uri
+                      +replyLink(event)
+                      | 
+                    if enableLocalComment
+                      +commentLink(event)
