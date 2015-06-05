@@ -1,6 +1,6 @@
 # News
 
-## 0.3.0: 2015-06-02 (planned)
+## 0.3.0: 2015-06-06
 
  * General
    * Missing table definition of sample configuration for fluent-plugin-groonga has been fixed.
