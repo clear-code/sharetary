@@ -1,3 +1,7 @@
+body {
+  padding-top: 50px; /* for fixed navigation bar */
+}
+
 @media (min-width: 992px) {
   .compact-events-view .event-binary-even > *[class^="col-md-"] {
     float: right;
