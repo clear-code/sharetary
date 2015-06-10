@@ -7,6 +7,13 @@ html(lang='ja')
     .container.archive-view
       h1= title
 
+      if limited
+        div.alert.alert-info(role='alert')
+          |  Currently, only 
+          != limit
+          |  events are shown.
+          |  To see more events, you must set any filter.
+
       include ./includes/events-shared.jade
 
       - var fullWidth = 12;
