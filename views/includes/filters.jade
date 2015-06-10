@@ -26,5 +26,9 @@ mixin filtersDialog
               != ' to '
               input#filter-before(type='number', name='before', value=filters.before, placeholder='Latest timestamp in unixtime (UTC)')
           .modal-footer
-            a.btn.btn-default(href=current) Clear
-            input.btn.btn-primary(type='submit', value='Apply')
+            .row
+              .col-md-6.text-left
+                a.btn.btn-default(href=current) Clear All
+              .col-md-6.text-right
+                button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                input.btn.btn-primary(type='submit', value='Apply')
