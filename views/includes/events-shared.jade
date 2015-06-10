@@ -90,11 +90,12 @@ mixin compactEventFooter(event)
 mixin compactEventItem(event, width, indent, binaryClass)
   - var paddingClass = 'col-md-' + indent;
   - var columnClass = 'col-md-' + (width - indent);
+  - var extraDescription = event.extra_description ? '\n\n' + event.extra_description : '' ;
   .row.event-item(id='event-' + encodeURIComponent(event._key),
                   data-created-at=event.created_at,
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
-                  title=event.title + ' by ' + event.actor + '\n\n' + event.description,
+                  title=event.title + ' by ' + event.actor + '\n\n' + event.description + extraDescription,
                   class='actor-class-' + event.actor_class,
                   class='event-class-' + event.class,
                   class='event-binary-' + (binaryClass || 'odd'))
