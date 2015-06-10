@@ -7,6 +7,7 @@ column_create --table Events --name scope --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name scope_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
+column_create --table Events --name extra_description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name source_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name reply_uri --flags COLUMN_SCALAR --type ShortText
@@ -25,4 +26,5 @@ table_create --name Terms --flags TABLE_PAT_KEY --key_type ShortText --default_t
 column_create --table Terms --name Events_scope_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source scope
 column_create --table Terms --name Events_title_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source title
 column_create --table Terms --name Events_description_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source description
+column_create --table Terms --name Events_extra_description_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source extra_description
 column_create --table Terms --name Events_uri_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source uri
