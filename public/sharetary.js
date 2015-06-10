@@ -61,6 +61,23 @@ $(function() {
   fillDatetimeFields('after');
   fillDatetimeFields('before');
 
+  $('*[id^="filter-after-"]').each(function() {
+    var field = $(this);
+    field.data('old-value', field.val());
+    field.bind('propertychange change click keyup input paste', function(event) {
+      if (field.data('old-value') != field.val())
+        updateFilterFromFields('after');
+    });
+  });
+  $('*[id^="filter-before-"]').each(function() {
+    var field = $(this);
+    field.data('old-value', field.val());
+    field.bind('propertychange change click keyup input paste', function(event) {
+      if (field.data('old-value') != field.val())
+        updateFilterFromFields('before');
+    });
+  });
+
   var id = encodeURIComponent(location.hash.substr(1));
   if (id)
     scrollToTarget(id);
