@@ -3,7 +3,7 @@ mixin filtersButton
 
 mixin filtersDialog
   #filters.modal.fade(role='dialog', aria-hidden='true')
-    form(method='GET', action=current, onsubmit='updateFilterFromFields("after"); updateFilterFromFields("before")')
+    form(method='GET', action=current)
       .modal-dialog
         .modal-content
           .modal-header
@@ -56,4 +56,6 @@ mixin filtersDialog
                 a.btn.btn-default(href=current) Clear All
               .col-md-6.text-right
                 button.btn.btn-default(type='button', data-dismiss='modal') Cancel
-                input.btn.btn-primary(type='submit', value='Apply')
+                input.btn.btn-primary(type='submit', value='Apply',
+                                      onmousedown='updateFilterFromFields("after"); updateFilterFromFields("before")',
+                                      onkeydown='updateFilterFromFields("after"); updateFilterFromFields("before")')
