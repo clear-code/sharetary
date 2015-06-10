@@ -4,6 +4,11 @@ nav.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
       a.navbar-brand(href='/') Sharetary
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar')
+        span.sr-only Toggle Navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
         - var classesForTimeline = current == '/timeline' ? 'active' : '';
