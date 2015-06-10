@@ -35,6 +35,17 @@ mixin filtersDialog
               | :
               input#filter-after-second(type='number', name='after-second', style='width:3em', placeholder='ss')
               | (Oldest timestamp)
+              if filters.after
+                script(type='text/javascript')
+                  | (function() {
+                  != 'var afterDate = new Date(' + filters.after + ' * 1000);'
+                  |   $('#filter-after-year').attr('value', afterDate.getFullYear());
+                  |   $('#filter-after-month').attr('value', afterDate.getMonth() + 1);
+                  |   $('#filter-after-date').attr('value', afterDate.getDate());
+                  |   $('#filter-after-hour').attr('value', afterDate.getHours());
+                  |   $('#filter-after-minute').attr('value', afterDate.getMinutes());
+                  |   $('#filter-after-second').attr('value', afterDate.getSeconds());
+                  | })();
             p.input-group
               != ' To '
               input#filter-before(type='hidden', name='before', value=filters.before)
@@ -50,6 +61,17 @@ mixin filtersDialog
               | :
               input#filter-before-second(type='number', name='before-second', style='width:3em', placeholder='ss')
               | (Latest timestamp)
+              if filters.before
+                script(type='text/javascript')
+                  | (function() {
+                  != 'var beforeDate = new Date(' + filters.before + ' * 1000);'
+                  |   $('#filter-before-year').attr('value', beforeDate.getFullYear());
+                  |   $('#filter-before-month').attr('value', beforeDate.getMonth() + 1);
+                  |   $('#filter-before-date').attr('value', beforeDate.getDate());
+                  |   $('#filter-before-hour').attr('value', beforeDate.getHours());
+                  |   $('#filter-before-minute').attr('value', beforeDate.getMinutes());
+                  |   $('#filter-before-second').attr('value', beforeDate.getSeconds());
+                  | })();
           .modal-footer
             .row
               .col-md-6.text-left
