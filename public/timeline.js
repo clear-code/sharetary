@@ -2,12 +2,12 @@ function getElementHeights(collection) {
   var heights = [];
   collection.each(function() {
     var item = $(this);
-  try {
-    heights.push(item.height());
-  }
-  catch(error) {
-    heights.push(-1);
-  }
+    try {
+      heights.push(item.height());
+    }
+    catch(error) {
+      heights.push(-1);
+    }
   });
   return heights;
 }
