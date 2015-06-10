@@ -53,6 +53,10 @@ You simply have to define a table named `Events` with following columns (and loa
  * `description` (`Text` or `ShortText`):
    The main description of each event.
    For example, an event indicating a "commit" activity on the GitHub will have its commit message as its `description`.
+ * `extra_description` (`Text` or `ShortText`):
+   The extra description of each event.
+   It won't be rendered in the view, but will be shown in the tooltip of events.
+   For example, an event indicating a "commit" activity on the GitHub will have its "diff" as its `extra_description`.
  * `uri` (`Text` or `ShortText`):
    The related URI of each event.
  * `source_icon` (`Text` or `ShortText`):
