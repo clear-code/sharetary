@@ -1,8 +1,9 @@
 function getElementHeights(collection) {
   var heights = [];
-  collection.each(function(index, element) {
+  collection.each(function() {
+    var item = $(this);
   try {
-    heights.push($(element).height());
+    heights.push(item.height());
   }
   catch(error) {
     heights.push(-1);
