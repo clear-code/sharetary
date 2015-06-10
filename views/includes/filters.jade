@@ -23,55 +23,33 @@ mixin filtersDialog
             p.input-group
               != 'From '
               input#filter-after(type='hidden', name='after', value=filters.after)
-              input#filter-after-year(type='number', name='after-year', style='width:5em', placeholder='YYYY')
+              input#filter-after-year(placeholder='YYYY', type='number', style='width:5em', onchange='updateAfterFilter()')
               | -
-              input#filter-after-month(type='number', name='after-month', style='width:3em', placeholder='MM')
+              input#filter-after-month(placeholder='MM', type='number', style='width:3em', onchange='updateAfterFilter()')
               | -
-              input#filter-after-date(type='number', name='after-date', style='width:3em', placeholder='DD')
+              input#filter-after-date(placeholder='DD', type='number', style='width:3em', onchange='updateAfterFilter()')
               |  
-              input#filter-after-hour(type='number', name='after-hour', style='width:3em', placeholder='hh')
+              input#filter-after-hour(placeholder='hh', type='number', style='width:3em', onchange='updateAfterFilter()')
               | :
-              input#filter-after-minute(type='number', name='after-minute', style='width:3em', placeholder='mm')
+              input#filter-after-minute(placeholder='mm', type='number', style='width:3em', onchange='updateAfterFilter()')
               | :
-              input#filter-after-second(type='number', name='after-second', style='width:3em', placeholder='ss')
+              input#filter-after-second(placeholder='ss', type='number', style='width:3em', onchange='updateAfterFilter()')
               | (Oldest timestamp)
-              if filters.after
-                script(type='text/javascript')
-                  | (function() {
-                  != 'var afterDate = new Date(' + filters.after + ' * 1000);'
-                  |   $('#filter-after-year').attr('value', afterDate.getFullYear());
-                  |   $('#filter-after-month').attr('value', afterDate.getMonth() + 1);
-                  |   $('#filter-after-date').attr('value', afterDate.getDate());
-                  |   $('#filter-after-hour').attr('value', afterDate.getHours());
-                  |   $('#filter-after-minute').attr('value', afterDate.getMinutes());
-                  |   $('#filter-after-second').attr('value', afterDate.getSeconds());
-                  | })();
             p.input-group
               != ' To '
               input#filter-before(type='hidden', name='before', value=filters.before)
-              input#filter-before-year(type='number', name='before-year', style='width:5em', placeholder='YYYY')
+              input#filter-before-year(placeholder='YYYY', type='number', style='width:5em', onchange='updateBeforeFilter()')
               | -
-              input#filter-before-month(type='number', name='before-month', style='width:3em', placeholder='MM')
+              input#filter-before-month(placeholder='MM', type='number', style='width:3em', onchange='updateBeforeFilter()')
               | -
-              input#filter-before-date(type='number', name='before-date', style='width:3em', placeholder='DD')
+              input#filter-before-date(placeholder='DD', type='number', style='width:3em', onchange='updateBeforeFilter()')
               |  
-              input#filter-before-hour(type='number', name='before-hour', style='width:3em', placeholder='hh')
+              input#filter-before-hour(placeholder='hh', type='number', style='width:3em', onchange='updateBeforeFilter()')
               | :
-              input#filter-before-minute(type='number', name='before-minute', style='width:3em', placeholder='mm')
+              input#filter-before-minute(placeholder='mm', type='number', style='width:3em', onchange='updateBeforeFilter()')
               | :
-              input#filter-before-second(type='number', name='before-second', style='width:3em', placeholder='ss')
+              input#filter-before-second(placeholder='ss', type='number', style='width:3em', onchange='updateBeforeFilter()')
               | (Latest timestamp)
-              if filters.before
-                script(type='text/javascript')
-                  | (function() {
-                  != 'var beforeDate = new Date(' + filters.before + ' * 1000);'
-                  |   $('#filter-before-year').attr('value', beforeDate.getFullYear());
-                  |   $('#filter-before-month').attr('value', beforeDate.getMonth() + 1);
-                  |   $('#filter-before-date').attr('value', beforeDate.getDate());
-                  |   $('#filter-before-hour').attr('value', beforeDate.getHours());
-                  |   $('#filter-before-minute').attr('value', beforeDate.getMinutes());
-                  |   $('#filter-before-second').attr('value', beforeDate.getSeconds());
-                  | })();
           .modal-footer
             .row
               .col-md-6.text-left
