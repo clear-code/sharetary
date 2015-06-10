@@ -17,24 +17,43 @@ function scrollToEvent(link) {
 
 
 function fillDatetimeFields(prefix) {
-  var filterValue = $('#filter-' + prefix).attr('value');
+  var filterValue = $('#filter-' + prefix).val();
   if (filterValue) {
     var date = new Date(parseInt(filterValue) * 1000);
-    $('#filter-' + prefix + '-year').attr('value', date.getFullYear());
-    $('#filter-' + prefix + '-month').attr('value', date.getMonth() + 1);
-    $('#filter-' + prefix + '-date').attr('value', date.getDate());
-    $('#filter-' + prefix + '-hour').attr('value', date.getHours());
-    $('#filter-' + prefix + '-minute').attr('value', date.getMinutes());
-    $('#filter-' + prefix + '-second').attr('value', date.getSeconds());
+    $('#filter-' + prefix + '-year').val(date.getFullYear());
+    $('#filter-' + prefix + '-month').val(date.getMonth() + 1);
+    $('#filter-' + prefix + '-date').val(date.getDate());
+    $('#filter-' + prefix + '-hour').val(date.getHours());
+    $('#filter-' + prefix + '-minute').val(date.getMinutes());
+    $('#filter-' + prefix + '-second').val(date.getSeconds());
   }
   else {
-    $('#filter-' + prefix + '-year').attr('value', '');
-    $('#filter-' + prefix + '-month').attr('value', '');
-    $('#filter-' + prefix + '-date').attr('value', '');
-    $('#filter-' + prefix + '-hour').attr('value', '');
-    $('#filter-' + prefix + '-minute').attr('value', '');
-    $('#filter-' + prefix + '-second').attr('value', '');
+    $('#filter-' + prefix + '-year').val('');
+    $('#filter-' + prefix + '-month').val('');
+    $('#filter-' + prefix + '-date').val('');
+    $('#filter-' + prefix + '-hour').val('');
+    $('#filter-' + prefix + '-minute').val('');
+    $('#filter-' + prefix + '-second').val('');
   }
+}
+
+updateFilterFromFields.timers = {};
+function updateFilterFromFields(prefix) {
+  if (updateFilterFromFields.timers[prefix])
+    window.clearTimeout(updateFilterFromFields.timers[prefix]);
+  updateFilterFromFields.timers[prefix] = window.setTimeout(function() {
+    delete updateFilterFromFields.timers[prefix];
+    var date = new Date();
+    date.setFullYear(parseInt($('#filter-' + prefix + '-year').val() || 0),
+                     parseInt($('#filter-' + prefix + '-month').val() || '1') - 1,
+                     parseInt($('#filter-' + prefix + '-date').val() || 1));
+    date.setHours(parseInt($('#filter-' + prefix + '-hours').val() || 0),
+                  parseInt($('#filter-' + prefix + '-minute').val() || 0),
+                  parseInt($('#filter-' + prefix + '-second').val() || 0),
+                  0);
+    var unixtime = Math.floor(date.getTime() / 1000);
+    $('#filter-' + prefix).val(unixtime);
+  }, 100);
 }
 
 
