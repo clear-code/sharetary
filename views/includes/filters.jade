@@ -22,9 +22,34 @@ mixin filtersDialog
               input#filter-scope.form-control(name='scope', value=filters.scope || '', placeholder='Scope of events')
             p.input-group
               != 'From '
-              input#filter-after(type='number', name='after', value=filters.after, placeholder='Oldest timestamp in unixtime (UTC)')
-              != ' to '
-              input#filter-before(type='number', name='before', value=filters.before, placeholder='Latest timestamp in unixtime (UTC)')
+              input#filter-after(type='hidden', name='after', value=filters.after)
+              input#filter-after-year(type='number', name='after-year', style='width:5em', placeholder='YYYY')
+              | -
+              input#filter-after-month(type='number', name='after-month', style='width:3em', placeholder='MM')
+              | -
+              input#filter-after-date(type='number', name='after-date', style='width:3em', placeholder='DD')
+              |  
+              input#filter-after-hour(type='number', name='after-hour', style='width:3em', placeholder='hh')
+              | :
+              input#filter-after-minute(type='number', name='after-minute', style='width:3em', placeholder='mm')
+              | :
+              input#filter-after-second(type='number', name='after-second', style='width:3em', placeholder='ss')
+              | (Oldest timestamp)
+            p.input-group
+              != ' To '
+              input#filter-before(type='hidden', name='before', value=filters.before)
+              input#filter-before-year(type='number', name='before-year', style='width:5em', placeholder='YYYY')
+              | -
+              input#filter-before-month(type='number', name='before-month', style='width:3em', placeholder='MM')
+              | -
+              input#filter-before-date(type='number', name='before-date', style='width:3em', placeholder='DD')
+              |  
+              input#filter-before-hour(type='number', name='before-hour', style='width:3em', placeholder='hh')
+              | :
+              input#filter-before-minute(type='number', name='before-minute', style='width:3em', placeholder='mm')
+              | :
+              input#filter-before-second(type='number', name='before-second', style='width:3em', placeholder='ss')
+              | (Latest timestamp)
           .modal-footer
             .row
               .col-md-6.text-left
