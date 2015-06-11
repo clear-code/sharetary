@@ -1,0 +1,36 @@
+#!/bin/bash
+
+GROONGA_HOST=$1
+GROONGA_PORT=$2
+: ${GROONGA_HOST:=localhost}
+: ${GROONGA_PORT:=10041}
+
+GROONGA="http://$GROONGA_HOST:$GROONGA_PORT/d"
+
+echo "Preparing required tables..."
+curl -s "$GROONGA/table_create?name=Tags&flags=TABLE_HASH_KEY&key_type=ShortText" > /dev/null
+curl -s "$GROONGA/column_create?table=Tags&name=icon&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+
+curl -s "$GROONGA/table_create?name=Actors&flags=TABLE_HASH_KEY&key_type=ShortText" > /dev/null
+curl -s "$GROONGA/column_create?table=Actors&name=uri&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+curl -s "$GROONGA/column_create?table=Actors&name=icon&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+curl -s "$GROONGA/column_create?table=Actors&name=class&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+
+curl -s "$GROONGA/select?table=Events&limit=0&drilldown=scope&drilldown_limit=-1&drilldown_output_columns=_key" | jq ".[1][1][3:][][]" | while read scope
+do
+  echo "Creating a tag $scope..."
+  icon=$(curl -s "$GROONGA/select?table=Events&limit=1&filter=scope==$scope&output_columns=scope_icon" | jq ".[1][0][2][]")
+  curl -s "$GROONGA/load?table=Tags&columns=_key,icon" -d [[$scope,$icon]]
+done
+
+curl -s "$GROONGA/select?table=Events&limit=0&drilldown=actor&drilldown_limit=-1&drilldown_output_columns=_key" | jq ".[1][1][3:][][]" | while read actor
+do
+  echo "Creating an actor $actor..."
+  record="[$actor"
+  for field in $(curl -s "$GROONGA/select?table=Events&limit=1&filter=actor==$actor&output_columns=actor_icon,actor_uri,actor_class" | jq ".[1][0][2][]")
+  do
+    record="$record,$field"
+  done
+  record="$record]"
+  curl -s "$GROONGA/load?table=Actors&columns=_key,icon,uri,class" -d [$record]
+done
