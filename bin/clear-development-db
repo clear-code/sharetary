@@ -1,0 +1,19 @@
+#!/bin/bash
+
+BASE_DIR=$(dirname $(echo $(cd $(dirname $0);pwd)))
+
+$BASE_DIR/bin/stop-development-groonga-server
+should_restart=$?
+
+DATABASE_DIR=$BASE_DIR/database
+
+rm -rf $DATABASE_DIR
+mkdir -p $DATABASE_DIR
+
+groonga -n $DATABASE_DIR/db quit
+
+if [ $should_restart = 0 ]
+then
+  echo "Restarting development Groonga server..."
+  $BASE_DIR/bin/start-development-groonga-server
+fi

@@ -34,6 +34,7 @@
   },
   "scripts": {
     "sharetary-server": "./bin/sharetary-server",
+    "clear-development-db": "bash ./bin/clear-development-db",
     "reset-development-db": "bash ./bin/reset-development-db",
     "start-development-groonga-server": "bash ./bin/start-development-groonga-server",
     "stop-development-groonga-server": "bash ./bin/stop-development-groonga-server",
