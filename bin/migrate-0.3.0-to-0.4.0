@@ -1,9 +1,21 @@
 #!/bin/bash
 
-GROONGA_HOST=$1
-GROONGA_PORT=$2
+while getopts h:p:t: OPT
+do
+  case $OPT in
+    "h") GROONGA_HOST="$OPTARG" ;;
+    "p") GROONGA_PORT="$OPTARG" ;;
+    "t") EXTRA_TAG="$OPTARG" ;;
+  esac
+done
+
 : ${GROONGA_HOST:=localhost}
 : ${GROONGA_PORT:=10041}
+
+if [ "$EXTRA_TAG" != "" ]
+then
+  EXTRA_TAG=",\"$EXTRA_TAG\""
+fi
 
 GROONGA="http://$GROONGA_HOST:$GROONGA_PORT/d"
 
@@ -75,7 +87,7 @@ curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,scope" | jq -
 do
   key=$(echo "$record" | jq ".[0]")
   scope=$(echo "$record" | jq ".[1]")
-  echo "[$key,[$scope]]," >> "$events"
+  echo "[$key,[$scope$EXTRA_TAG]]," >> "$events"
 done
 echo "]" >> "$events"
 curl -d "@$events" -s "$GROONGA/load?table=Events&columns=_key,tags" > /dev/null
