@@ -71,7 +71,7 @@ function checkNewEvents() {
       if (!showNewEvent.running)
         showNewEvent();
 
-      setTimeout(checkNewEvents, 3000);
+      setTimeout(checkNewEvents, refreshInterval * 1000);
     }, 0);
   });
 }

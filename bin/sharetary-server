@@ -10,6 +10,7 @@ options.host             = '0.0.0.0';
 options.port             = 11041;
 options.enableTrustProxy = false;
 options.enableLocalComment = false;
+options.refreshInterval  = 3;
 
 options.groongaHost = 'localhost';
 options.groongaPort = 10041;
@@ -32,6 +33,9 @@ options
   .option('--enable-local-comment',
           'Allow to store comment locally. ' +
             '(' + options.enableLocalComment + ')')
+  .option('--refresh-interval <seconds>',
+          'Interval seconds to refresh the timeline (' + options.refreshInterval + ')',
+          intOption)
   .option('--groonga-host <host>',
           'Host of the Groonga HTTP server (' + options.groongaHost + ')')
   .option('--groonga-port <port>',
@@ -55,7 +59,8 @@ if (options.enableTrustProxy)
 views.init({
   application:        application,
   groonga:            groonga,
-  enableLocalComment: options.enableLocalComment
+  enableLocalComment: options.enableLocalComment,
+  refreshInterval:    options.refreshInterval
 });
 
 server.on('error', function(error) {
