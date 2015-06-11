@@ -5,6 +5,14 @@
  * General
    * Local comments becomes disabled by default.
      Now you have to specify `--enable-local-comment` option to activate the UI and endpoint.
+   * Schema is changed.
+     * Now actor's metadata is stored into another `Actors` table.
+     * New column `tags` is introduced and `scope` is migrated to a tag.
+     * Migration script `migrate-0.3.0-to-0.4.0` is now available.
+   * The navigation bar is fixed on the top.
+   * A menu button is available in the navigation bar for narrow screens.
+   * Timestamp filters can be applied more easily.
+     You don't have to calculate UNIX time manually anymore.
 
 ## 0.3.0: 2015-06-06
 
