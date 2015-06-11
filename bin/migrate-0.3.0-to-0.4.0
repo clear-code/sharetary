@@ -36,6 +36,17 @@ do
 done
 
 
+echo "Migrating actor related columns..."
+curl -s "$GROONGA/column_rename?table=Events&name=actor&new_name=old_actor" > /dev/null
+curl -s "$GROONGA/column_create?table=Events&name=actor&flags=COLUMN_SCALAR&type=Actors" > /dev/null
+curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,old_actor" | jq -c ".[1][0][2:][]" | while read record
+do
+  key=$(echo "$record" | jq ".[0]")
+  actor=$(echo "$record" | jq ".[1]")
+  curl -s "$GROONGA/load?table=Events&columns=_key,actor" -d [[$key,$actor]] > /dev/null
+done
+
+
 echo "Migrating scope to tags..."
 curl -s "$GROONGA/column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags" > /dev/null
 curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,scope" | jq -c ".[1][0][2:][]" | while read record
