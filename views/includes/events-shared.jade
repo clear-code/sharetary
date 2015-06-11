@@ -42,7 +42,7 @@ mixin eventTag(tag, event)
     if tags[tag].icon
       img.tag-icon(src=tags[tag].icon, alt="")
     else
-      span.glyphicon.glyphicon-filter(aria-hidden='true')
+      span.glyphicon.glyphicon-tag(aria-hidden='true')
     != tag
 
 mixin eventTags(event)
