@@ -1,20 +1,24 @@
 table_create --name Timestamps --flags TABLE_PAT_KEY --key_type Time
 
+table_create --name Tags --flags TABLE_HASH_KEY --key_type ShortText
+column_create --table Tags --name icon --flags COLUMN_SCALAR --type ShortText
+
+table_create --name Actor --flags TABLE_HASH_KEY --key_type ShortText
+column_create --table Actor --name uri --flags COLUMN_SCALAR --type ShortText
+column_create --table Actor --name icon --flags COLUMN_SCALAR --type ShortText
+column_create --table Actor --name class --flags COLUMN_SCALAR --type ShortText
+
 table_create --name Events --flags TABLE_HASH_KEY --key_type ShortText
 column_create --table Events --name type --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name class --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name scope --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name scope_icon --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name tags --flags COLUMN_VECTOR --type Tags
 column_create --table Events --name title --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name extra_description --flags COLUMN_SCALAR --type Text
 column_create --table Events --name uri --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name source_icon --flags COLUMN_SCALAR --type ShortText
 column_create --table Events --name reply_uri --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name actor --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name actor_uri --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name actor_icon --flags COLUMN_SCALAR --type ShortText
-column_create --table Events --name actor_class --flags COLUMN_SCALAR --type ShortText
+column_create --table Events --name actor --flags COLUMN_SCALAR --type Actor
 column_create --table Events --name timestamp --flags COLUMN_SCALAR --type Time
 column_create --table Events --name created_at --flags COLUMN_SCALAR --type Time
 column_create --table Events --name parent --flags COLUMN_SCALAR --type Events
@@ -23,8 +27,11 @@ column_create --table Timestamps --name Events_timestamp_index --flags COLUMN_IN
 column_create --table Timestamps --name Events_created_at_index --flags COLUMN_INDEX --type Events --source created_at
 
 table_create --name Terms --flags TABLE_PAT_KEY --key_type ShortText --default_tokenizer TokenBigram --normalizer NormalizerAuto
-column_create --table Terms --name Events_scope_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source scope
 column_create --table Terms --name Events_title_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source title
 column_create --table Terms --name Events_description_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source description
 column_create --table Terms --name Events_extra_description_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source extra_description
 column_create --table Terms --name Events_uri_index --flags COLUMN_INDEX|WITH_POSITION --type Events --source uri
+
+column_create --table Tags --name Events_tags_index --flags COLUMN_INDEX --type Events --source tags
+
+column_create --table Actor --name Events_actor_index --flags COLUMN_INDEX --type Events --source actor
