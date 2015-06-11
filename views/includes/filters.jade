@@ -18,8 +18,8 @@ mixin filtersDialog
               label.input-group-addon(for='filter-actors') Actors
               input#filter-actors.form-control(name='actors', value=filters.actors || '', placeholder='Name of actors')
             p.input-group
-              label.input-group-addon(for='filter-scope') Scope
-              input#filter-scope.form-control(name='scope', value=filters.scope || '', placeholder='Scope of events')
+              label.input-group-addon(for='filter-tags') Tags
+              input#filter-tags.form-control(name='tags', value=filters.tags || '', placeholder='Tags (comma separated)')
             p.input-group
               != 'From '
               input#filter-after(type='hidden', name='after', value=filters.after)

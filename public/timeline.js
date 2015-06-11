@@ -42,7 +42,7 @@ function checkNewEvents() {
     'boundary=' + boundary,
     'lastBinaryClass=' + lastBinaryClass,
     'actors=' + $('#filter-actors').attr('value'),
-    'scope=' + $('#filter-scope').attr('value')
+    'tags=' + $('#filter-tags').attr('value')
   ];
   $.ajax({
     url: '/timeline-new-events?' + parameters.join('&')
