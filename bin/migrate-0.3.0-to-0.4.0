@@ -24,7 +24,7 @@ echo "[" >> "$tags"
 curl -s "$GROONGA/select?table=Events&limit=0&drilldown=scope&drilldown_limit=-1&drilldown_output_columns=_key" | jq ".[1][1][3:][][]" | while read scope
 do
   icon=$(curl -s "$GROONGA/select?table=Events&limit=1&filter=scope==$scope&output_columns=scope_icon" | jq ".[1][0][2][]")
-  echo "[$scope,$icon]", >> "$tags"
+  echo "[$scope,$icon]," >> "$tags"
 done
 echo "]" >> "$tags"
 curl -d "@$tags" -s "$GROONGA/load?table=Tags&columns=_key,icon" > /dev/null
