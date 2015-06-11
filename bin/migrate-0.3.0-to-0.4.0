@@ -34,3 +34,13 @@ do
   record="$record]"
   curl -s "$GROONGA/load?table=Actors&columns=_key,icon,uri,class" -d [$record]
 done
+
+
+curl -s "$GROONGA/column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags" > /dev/null
+curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,scope" | jq -c ".[1][0][2:][]" | while read record
+do
+  key=$(echo "$record" | jq ".[0]")
+  scope=$(echo "$record" | jq ".[1]")
+  curl -s "$GROONGA/load?table=Events&columns=_key,tags" -d [[$key,[$scope]]]
+done
+
