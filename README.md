@@ -67,7 +67,7 @@ You simply have to define some tables with required columns (and load data to th
    The URI of an UI to post any reply for each event.
    For example, an event indicating a "commit" activity on the GitHub will have link to the comment form of the commit as its `reply_uri`.
    If your crawler fetches posted comments from the UI also, then you'll see them as events related to the parent event.
- * `actor` (`Actor`):
+ * `actor` (`Actors`):
    Indicates the actor's name of each event.
    For example, an events from GitHub activity will have the account id as its `actor`.
  * `timestamp` (`Time'):
@@ -85,7 +85,7 @@ You simply have to define some tables with required columns (and load data to th
  * `icon` (`Text` or `ShortText`):
    URI of the icon for the tag.
 
-### `Actor` (`TABLE_HASH_KEY` or `TABLE_PAT_KEY`)
+### `Actors` (`TABLE_HASH_KEY` or `TABLE_PAT_KEY`)
 
  * `uri` (`Text` or `ShortText`):
    The related URI of the actor.
