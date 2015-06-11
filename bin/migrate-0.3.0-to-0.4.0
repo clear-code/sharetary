@@ -56,3 +56,9 @@ do
   curl -s "$GROONGA/load?table=Events&columns=_key,tags" -d [[$key,[$scope]]] > /dev/null
 done
 
+
+echo "Migrating indexes..."
+curl -s "$GROONGA/column_remove?table=Terms&name=Events_actor_index" > /dev/null
+curl -s "$GROONGA/column_create?table=Actors&name=Events_actor_index&flags=COLUMN_INDEX&type=Events&source=actor" > /dev/null
+curl -s "$GROONGA/column_create?table=Tags&name=Events_tags_index&flags=COLUMN_INDEX&type=Events&source=tags" > /dev/null
+
