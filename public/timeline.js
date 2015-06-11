@@ -28,7 +28,6 @@ function showNewEvent() {
   var scrollPosition = $(window).scrollTop();
   if (event.height > -1 &&
       scrollPosition > allowedMaxScrollPosition) {
-      console.log('Scroll');
     $('html, body').animate({ scrollTop: scrollPosition + event.height }, 'normal');
   }
 }
