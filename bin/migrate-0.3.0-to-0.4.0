@@ -20,7 +20,7 @@ curl -s "$GROONGA/select?table=Events&limit=0&drilldown=scope&drilldown_limit=-1
 do
   echo "Creating a tag $scope..."
   icon=$(curl -s "$GROONGA/select?table=Events&limit=1&filter=scope==$scope&output_columns=scope_icon" | jq ".[1][0][2][]")
-  curl -s "$GROONGA/load?table=Tags&columns=_key,icon" -d [[$scope,$icon]]
+  curl -s "$GROONGA/load?table=Tags&columns=_key,icon" -d [[$scope,$icon]] > /dev/null
 done
 
 curl -s "$GROONGA/select?table=Events&limit=0&drilldown=actor&drilldown_limit=-1&drilldown_output_columns=_key" | jq ".[1][1][3:][][]" | while read actor
@@ -32,15 +32,16 @@ do
     record="$record,$field"
   done
   record="$record]"
-  curl -s "$GROONGA/load?table=Actors&columns=_key,icon,uri,class" -d [$record]
+  curl -s "$GROONGA/load?table=Actors&columns=_key,icon,uri,class" -d [$record] > /dev/null
 done
 
 
+echo "Migrating scope to tags..."
 curl -s "$GROONGA/column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags" > /dev/null
 curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,scope" | jq -c ".[1][0][2:][]" | while read record
 do
   key=$(echo "$record" | jq ".[0]")
   scope=$(echo "$record" | jq ".[1]")
-  curl -s "$GROONGA/load?table=Events&columns=_key,tags" -d [[$key,[$scope]]]
+  curl -s "$GROONGA/load?table=Events&columns=_key,tags" -d [[$key,[$scope]]] > /dev/null
 done
 
