@@ -100,13 +100,19 @@ d "column_rename?table=Events&name=actor&new_name=old_actor"
 d "column_create?table=Events&name=actor&flags=COLUMN_SCALAR&type=Actors"
 events=$(mktemp)
 echo "[" >> "$events"
-d_select "table=Events&limit=-1&output_columns=_key,old_actor" | \
+d_select "table=Events&limit=-1&output_columns=_key,actor,old_actor" | \
   jq -c ".[1][0][2:][]" | \
   while read record
 do
   key=$(echo "$record" | jq ".[0]")
-  actor=$(echo "$record" | jq ".[1]")
-  echo "[$key,$actor]," >> "$events"
+  old_actor=$(echo "$record" | jq ".[2]")
+  # for dry-run mode, there is no old_actor column yet.
+  if [ "$old_actor" = "null" ]
+  then
+    actor=$(echo "$record" | jq ".[1]")
+    old_actor="$actor"
+  fi
+  echo "[$key,$old_actor]," >> "$events"
 done
 echo "]" >> "$events"
 d "load?table=Events&columns=_key,actor" "@$events"
