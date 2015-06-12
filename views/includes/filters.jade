@@ -14,12 +14,54 @@ mixin filtersDialog
             p.input-group
               label.input-group-addon(for='filter-searchTerm') Keywords
               input#filter-searchTerm.form-control(name='searchTerm', value=filters.searchTerm || '', placeholder='Terms to be searched')
-            p.input-group
-              label.input-group-addon(for='filter-actors') Actors
-              input#filter-actors.form-control(name='actors', value=filters.actors || '', placeholder='Name of actors')
-            p.input-group
-              label.input-group-addon(for='filter-tags') Tags
-              input#filter-tags.form-control(name='tags', value=filters.tags || '', placeholder='Tags (comma separated)')
+            div.panel.panel-default
+              div.panel-heading(role='tab')
+                h3.panel-title
+                  a#filter-actors-container-toggler(data-toggle='collapse',
+                                                    href='#filter-actors-container',
+                                                    aria-controls='filter-actors-container')
+                    | Actors
+              div#filter-actors-container.panel-collapse.collapse(role='tabpanel',
+                                                                  aria-labelledby='filter-actors-container-toggler')
+                div.panel-body
+                  input(type='hidden', id='filter-actors', name='actors', value=filters.actors.join(','))
+                  each actor in actors
+                    span(style='white-space: nowrap; vertical-align: middle')
+                      input(type='checkbox',
+                            id='filter-actors-item-' + actor._key,
+                            checked=(filters.actors.indexOf(actor._key) > -1)
+                            data-actor=actor._key)
+                      label(for='filter-actors-item-' + actor._key)
+                        if actor.icon
+                          img.actor-icon(src=actor.icon, alt='')
+                        else
+                          span.glyphicon.glyphicon-user(aria-hidden='true')
+                        != actor._key
+                    |  
+            div.panel.panel-default
+              div.panel-heading(role='tab')
+                h3.panel-title
+                  a#filter-tags-container-toggler(data-toggle='collapse',
+                                                  href='#filter-tags-container',
+                                                  aria-controls='filter-tags-container')
+                    | Tags
+              div#filter-tags-container.panel-collapse.collapse(role='tabpanel',
+                                                                aria-labelledby='filter-tags-container-toggler')
+                div.panel-body
+                  input(type='hidden', id='filter-tags', name='tags', value=filters.tags.join(','))
+                  each tag in tags
+                    span(style='white-space: nowrap; vertical-align: middle')
+                      input(type='checkbox',
+                            id='filter-tags-item-' + tag._key,
+                            checked=(filters.tags.indexOf(tag._key) > -1)
+                            data-tag=tag._key)
+                      label(for='filter-tags-item-' + tag._key)
+                        if tag.icon
+                          img.tag-icon(src=tag.icon, alt='')
+                        else
+                          span.glyphicon.glyphicon-tag(aria-hidden='true')
+                        != tag._key
+                    |  
             p.input-group
               != 'From '
               input#filter-after(type='hidden', name='after', value=filters.after)

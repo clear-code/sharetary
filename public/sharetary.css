@@ -74,12 +74,12 @@ body {
   z-index: 10;
 }
 
-.actor-icon {
+.event-item .actor-icon {
   float: left;
   margin-right: 0.5em;
 }
 
-.actor-icon img {
+.event-item .actor-icon img {
   max-width: 64px;
   max-height: 64px;
 }
@@ -95,7 +95,9 @@ body {
   font-size: smaller;
 }
 
-.source-icon, .tag-icon {
+img.source-icon,
+img.tag-icon,
+img.actor-icon {
   max-width: 1.5em;
   max-height: 1.5em;
 }
