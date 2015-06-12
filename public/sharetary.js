@@ -56,24 +56,19 @@ function updateFilterFromFields(prefix) {
   }, 100);
 }
 
-function getCheckedActors() {
-  var actors = ($('#filter-actors').prop('value') || '').trim();
-  return actors ? actors.split(/\s*,\s*/) : [] ;
-}
-
-function getCheckedTags() {
-  var tags = ($('#filter-tags').prop('value') || '').trim();
-  return tags ? tags.split(/\s*,\s*/) : [] ;
-}
-
 function initActorsAndTagsCheckboxes() {
-  var actors = getCheckedActors();
+  function getValues(selector) {
+    var actors = ($(selector).prop('value') || '').trim();
+    return actors ? actors.split(/\s*,\s*/) : [] ;
+  }
+
+  var actors = getValues('#filter-actors');
   $('*[id^="filter-actors-item-"]').each(function() {
     var checkbox = $(this);
     var actor = checkbox.attr('data-actor');
     checkbox.prop('checked', actors.indexOf(actor) > -1);
     checkbox.bind('propertychange change click keyup', function(event) {
-      var actors = getCheckedActors().filter(function(oneActor) {
+      var actors = getValues('#filter-actors').filter(function(oneActor) {
         return oneActor != actor;
       });
       if (checkbox.prop('checked'))
@@ -82,13 +77,13 @@ function initActorsAndTagsCheckboxes() {
     });
   });
 
-  var tags = getCheckedTags();
+  var tags = getValues('#filter-tags');
   $('*[id^="filter-tags-item-"]').each(function() {
     var checkbox = $(this);
     var tag = checkbox.attr('data-tag');
     checkbox.prop('checked', tags.indexOf(tag) > -1);
     checkbox.bind('propertychange change click keyup', function(event) {
-      var tags = getCheckedTags().filter(function(oneTag) {
+      var tags = getValues('#filter-tags').filter(function(oneTag) {
         return oneTag != tag;
       });
       if (checkbox.prop('checked'))
