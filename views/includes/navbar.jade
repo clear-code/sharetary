@@ -15,9 +15,9 @@ nav.navbar.navbar-default.navbar-fixed-top
         - var classesForArchive = current == '/archive' ? 'active' : '';
         - var classesForAdd = current == '/add' ? 'active' : '';
         li(class=classesForTimeline)
-          a(href='/timeline') Timeline view
+          a(href='/timeline' + (filters.queryParams ? '?' + filters.queryParams : '')) Timeline view
         li(class=classesForArchive)
-          a(href='/archive') Archive view
+          a(href='/archive' + (filters.queryParams ? '?' + filters.queryParams : '')) Archive view
         if enableLocalComment
           li(class=classesForAdd)
             a(href='/add') Post
