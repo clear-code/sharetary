@@ -28,10 +28,10 @@ mixin filtersDialog
                   each actor in actors
                     span(style='white-space: nowrap; vertical-align: middle')
                       input(type='checkbox',
-                            id='filter-actors-item-' + actor._key,
+                            id='filter-actors-item-' + escape(actor._key),
                             checked=(filters.actors.indexOf(actor._key) > -1)
                             data-actor=actor._key)
-                      label(for='filter-actors-item-' + actor._key)
+                      label(for='filter-actors-item-' + escape(actor._key))
                         if actor.icon
                           img.actor-icon(src=actor.icon, alt='')
                         else
@@ -52,10 +52,10 @@ mixin filtersDialog
                   each tag in tags
                     span(style='white-space: nowrap; vertical-align: middle')
                       input(type='checkbox',
-                            id='filter-tags-item-' + tag._key,
+                            id='filter-tags-item-' + escape(tag._key),
                             checked=(filters.tags.indexOf(tag._key) > -1)
                             data-tag=tag._key)
-                      label(for='filter-tags-item-' + tag._key)
+                      label(for='filter-tags-item-' + escape(tag._key))
                         if tag.icon
                           img.tag-icon(src=tag.icon, alt='')
                         else
