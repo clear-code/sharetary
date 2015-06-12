@@ -2,12 +2,13 @@
 # Usage:
 #   $ npm run migrate-0.3.0-to-0.4.0 -h localhost -p 10041 -t "known-events"
 
-while getopts h:p:t: OPT
+while getopts h:p:t:d OPT
 do
   case $OPT in
     "h") GROONGA_HOST="$OPTARG" ;;
     "p") GROONGA_PORT="$OPTARG" ;;
     "t") EXTRA_TAG="$OPTARG" ;;
+    "d") DRY_RUN=1 ;;
   esac
 done
 
@@ -21,30 +22,54 @@ fi
 
 GROONGA="http://$GROONGA_HOST:$GROONGA_PORT/d"
 
-echo "Preparing required tables..."
-curl -s "$GROONGA/table_create?name=Tags&flags=TABLE_HASH_KEY&key_type=ShortText" > /dev/null
-curl -s "$GROONGA/column_create?table=Tags&name=icon&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+d() {
+  if [ "$DRY_RUN" = "1" ]
+  then
+    echo "> $1"
+    if [ "$2" != "" ]
+    then
+      echo "> ${2:1}"
+      cat "${2:1}"
+    fi
+    return
+  fi
 
-curl -s "$GROONGA/table_create?name=Actors&flags=TABLE_HASH_KEY&key_type=ShortText" > /dev/null
-curl -s "$GROONGA/column_create?table=Actors&name=uri&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
-curl -s "$GROONGA/column_create?table=Actors&name=icon&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
-curl -s "$GROONGA/column_create?table=Actors&name=class&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
+  if [ "$2" != "" ]
+  then
+    curl -s "$GROONGA/$1" -d "$2" > /dev/null
+  else
+    curl -s "$GROONGA/$1" > /dev/null
+  fi
+}
+
+d_select() {
+  curl -s "$GROONGA/select?$1"
+}
+
+echo "Preparing required tables..."
+d "table_create?name=Tags&flags=TABLE_HASH_KEY&key_type=ShortText"
+d "column_create?table=Tags&name=icon&flags=COLUMN_SCALAR&type=ShortText"
+
+d "table_create?name=Actors&flags=TABLE_HASH_KEY&key_type=ShortText"
+d "column_create?table=Actors&name=uri&flags=COLUMN_SCALAR&type=ShortText"
+d "column_create?table=Actors&name=icon&flags=COLUMN_SCALAR&type=ShortText"
+d "column_create?table=Actors&name=class&flags=COLUMN_SCALAR&type=ShortText"
 
 
 echo "Preparing tags..."
 
 tags=$(mktemp)
 echo "[" >> "$tags"
-curl -s "$GROONGA/select?table=Events&limit=0&drilldown=scope&drilldown_limit=-1&drilldown_output_columns=_key" | \
+d_select "table=Events&limit=0&drilldown=scope&drilldown_limit=-1&drilldown_output_columns=_key" | \
   jq ".[1][1][3:][][]" | \
   while read scope
 do
-  icon=$(curl -s "$GROONGA/select?table=Events&limit=1&filter=scope==$scope&output_columns=scope_icon" | \
+  icon=$(d_select "table=Events&limit=1&filter=scope==$scope&output_columns=scope_icon" | \
            jq ".[1][0][2][]")
   echo "[$scope,$icon]," >> "$tags"
 done
 echo "]" >> "$tags"
-curl -d "@$tags" -s "$GROONGA/load?table=Tags&columns=_key,icon" > /dev/null
+d "load?table=Tags&columns=_key,icon" "@$tags"
 rm "$tags"
 
 
@@ -52,12 +77,12 @@ echo "Preparing actors..."
 
 actors=$(mktemp)
 echo "[" >> "$actors"
-curl -s "$GROONGA/select?table=Events&limit=0&drilldown=actor&drilldown_limit=-1&drilldown_output_columns=_key" | \
+d_select "table=Events&limit=0&drilldown=actor&drilldown_limit=-1&drilldown_output_columns=_key" | \
   jq ".[1][1][3:][][]" | \
   while read actor
 do
-  echo "[$actor", >> "$actors"
-  for field in $(curl -s "$GROONGA/select?table=Events&limit=1&filter=actor==$actor&output_columns=actor_icon,actor_uri,actor_class" | \
+  echo "[$actor" >> "$actors"
+  for field in $(d_select "table=Events&limit=1&filter=actor==$actor&output_columns=actor_icon,actor_uri,actor_class" | \
                    jq ".[1][0][2][]")
   do
     echo ",$field" >> "$actors"
@@ -65,17 +90,17 @@ do
   echo "]," >> "$actors"
 done
 echo "]" >> "$actors"
-curl -d "@$actors" -s "$GROONGA/load?table=Actors&columns=_key,icon,uri,class" > /dev/null
+d "load?table=Actors&columns=_key,icon,uri,class" "@$actors"
 rm "$actors"
 
 
 echo "Migrating actor related columns..."
 
-curl -s "$GROONGA/column_rename?table=Events&name=actor&new_name=old_actor" > /dev/null
-curl -s "$GROONGA/column_create?table=Events&name=actor&flags=COLUMN_SCALAR&type=Actors" > /dev/null
+d "column_rename?table=Events&name=actor&new_name=old_actor"
+d "column_create?table=Events&name=actor&flags=COLUMN_SCALAR&type=Actors"
 events=$(mktemp)
 echo "[" >> "$events"
-curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,old_actor" | \
+d_select "table=Events&limit=-1&output_columns=_key,old_actor" | \
   jq -c ".[1][0][2:][]" | \
   while read record
 do
@@ -84,16 +109,16 @@ do
   echo "[$key,$actor]," >> "$events"
 done
 echo "]" >> "$events"
-curl -d "@$events" -s "$GROONGA/load?table=Events&columns=_key,actor" > /dev/null
+d "load?table=Events&columns=_key,actor" "@$events"
 rm "$events"
 
 
 echo "Migrating scope column to tags..."
 
-curl -s "$GROONGA/column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags" > /dev/null
+d "column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags"
 events=$(mktemp)
 echo "[" >> "$events"
-curl -s "$GROONGA/select?table=Events&limit=-1&output_columns=_key,scope" | \
+d_select "table=Events&limit=-1&output_columns=_key,scope" | \
   jq -c ".[1][0][2:][]" | \
   while read record
 do
@@ -102,13 +127,13 @@ do
   echo "[$key,[$scope$EXTRA_TAG]]," >> "$events"
 done
 echo "]" >> "$events"
-curl -d "@$events" -s "$GROONGA/load?table=Events&columns=_key,tags" > /dev/null
+d "load?table=Events&columns=_key,tags" "@$events"
 rm "$events"
 
 
 echo "Migrating indexes..."
 
-curl -s "$GROONGA/column_remove?table=Terms&name=Events_actor_index" > /dev/null
-curl -s "$GROONGA/column_create?table=Actors&name=Events_actor_index&flags=COLUMN_INDEX&type=Events&source=actor" > /dev/null
-curl -s "$GROONGA/column_create?table=Tags&name=Events_tags_index&flags=COLUMN_INDEX&type=Events&source=tags" > /dev/null
+d "column_remove?table=Terms&name=Events_actor_index"
+d "column_create?table=Actors&name=Events_actor_index&flags=COLUMN_INDEX&type=Events&source=actor"
+d "column_create?table=Tags&name=Events_tags_index&flags=COLUMN_INDEX&type=Events&source=tags"
 
