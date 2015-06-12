@@ -31,7 +31,7 @@ curl -s "$GROONGA/column_create?table=Actors&name=icon&flags=COLUMN_SCALAR&type=
 curl -s "$GROONGA/column_create?table=Actors&name=class&flags=COLUMN_SCALAR&type=ShortText" > /dev/null
 
 
-echo "Creating a tags..."
+echo "Preparing tags..."
 
 tags=$(mktemp)
 echo "[" >> "$tags"
@@ -48,7 +48,7 @@ curl -d "@$tags" -s "$GROONGA/load?table=Tags&columns=_key,icon" > /dev/null
 rm "$tags"
 
 
-echo "Creating actors..."
+echo "Preparing actors..."
 
 actors=$(mktemp)
 echo "[" >> "$actors"
@@ -88,7 +88,7 @@ curl -d "@$events" -s "$GROONGA/load?table=Events&columns=_key,actor" > /dev/nul
 rm "$events"
 
 
-echo "Migrating scope to tags..."
+echo "Migrating scope column to tags..."
 
 curl -s "$GROONGA/column_create?table=Events&name=tags&flags=COLUMN_VECTOR&type=Tags" > /dev/null
 events=$(mktemp)
