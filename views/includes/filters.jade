@@ -36,7 +36,7 @@ mixin filtersDialog
                           img.actor-icon(src=actor.icon, alt='')
                         else
                           span.glyphicon.glyphicon-user(aria-hidden='true')
-                        != actor._key
+                        != actor._key + '(' + actor._nsubrecs + ')'
                     |  
             div.panel.panel-default
               div.panel-heading(role='tab')
@@ -60,7 +60,7 @@ mixin filtersDialog
                           img.tag-icon(src=tag.icon, alt='')
                         else
                           span.glyphicon.glyphicon-tag(aria-hidden='true')
-                        != tag._key
+                        != tag._key + '(' + tag._nsubrecs + ')'
                     |  
             p.input-group
               != 'From '
