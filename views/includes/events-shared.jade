@@ -48,6 +48,7 @@ mixin eventTag(tag, event)
 mixin eventTags(event)
   each tag in event.tags
     +eventTag(tag, event)
+    |  
 
 mixin eventParent(event)
   if event.parentEvent
