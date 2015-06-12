@@ -66,27 +66,7 @@ function getCheckedTags() {
   return tags ? tags.split(/\s*,\s*/) : [] ;
 }
 
-$(function() {
-  fillDatetimeFields('after');
-  fillDatetimeFields('before');
-
-  $('*[id^="filter-after-"]').each(function() {
-    var field = $(this);
-    field.data('old-value', field.val());
-    field.bind('propertychange change click keyup input paste', function(event) {
-      if (field.data('old-value') != field.val())
-        updateFilterFromFields('after');
-    });
-  });
-  $('*[id^="filter-before-"]').each(function() {
-    var field = $(this);
-    field.data('old-value', field.val());
-    field.bind('propertychange change click keyup input paste', function(event) {
-      if (field.data('old-value') != field.val())
-        updateFilterFromFields('before');
-    });
-  });
-
+function initActorsAndTagsCheckboxes() {
   var actors = getCheckedActors();
   $('*[id^="filter-actors-item-"]').each(function() {
     var checkbox = $(this);
@@ -116,6 +96,51 @@ $(function() {
       $('#filter-tags').val(tags.join(','));
     });
   });
+}
+
+loadActorsAndTagsCheckboxes.fired = false;
+function loadActorsAndTagsCheckboxes() {
+  if (loadActorsAndTagsCheckboxes.fired)
+    return;
+
+  loadActorsAndTagsCheckboxes.fired = true;
+  var parameters = [
+    'actors=' + $('#filter-actors').val(),
+    'tags=' + $('#filter-tags').val()
+  ];
+  $.ajax({
+    url: '/filters-actors-and-tags?' + parameters.join('&')
+  }).done(function(data) {
+    var checkboxes = $(data);
+    checkboxes.css({ height: 'hidden', opacity: 'hidden' });
+    $('#filter-actors-and-tags').append(checkboxes);
+    checkboxes.animate({ height: 'show', opacity: 'show' }, 'normal');
+    initActorsAndTagsCheckboxes();
+  });
+}
+
+$(function() {
+  fillDatetimeFields('after');
+  fillDatetimeFields('before');
+
+  $('*[id^="filter-after-"]').each(function() {
+    var field = $(this);
+    field.data('old-value', field.val());
+    field.bind('propertychange change click keyup input paste', function(event) {
+      if (field.data('old-value') != field.val())
+        updateFilterFromFields('after');
+    });
+  });
+  $('*[id^="filter-before-"]').each(function() {
+    var field = $(this);
+    field.data('old-value', field.val());
+    field.bind('propertychange change click keyup input paste', function(event) {
+      if (field.data('old-value') != field.val())
+        updateFilterFromFields('before');
+    });
+  });
+
+  $('#filters').on('show.bs.modal', loadActorsAndTagsCheckboxes);
 
   var id = encodeURIComponent(location.hash.substr(1));
   if (id)
