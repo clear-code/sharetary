@@ -39,7 +39,7 @@ mixin eventTitle(event)
 mixin eventTag(tag, event)
   - var actorsFilter = filters.actors ? '&actors=' + filters.actors : '' ;
   a(href=current + '?tags=' + tag + actorsFilter, title='Show only same tag events')
-    if tags[tag].icon
+    if tags[tag] && tags[tag].icon
       img.tag-icon(src=tags[tag].icon, alt="")
     else
       span.glyphicon.glyphicon-tag(aria-hidden='true')
@@ -59,11 +59,12 @@ mixin eventParent(event)
 
 mixin eventActor(event)
   - var tagsFilter = filters.tags ? '&tags=' + filters.tags : '' ;
-  - var actorLink = actors[event.actor].uri ? actors[event.actor].uri : current + '?actors=' + event.actor + tagsFilter;
-  - var actorTarget = actors[event.actor].uri ? '_blank' : '' ;
-  if actors[event.actor].icon
+  - var actor = actors[event.actor];
+  - var actorLink = actor && actor.uri ? actor.uri : current + '?actors=' + event.actor + tagsFilter;
+  - var actorTarget = actor && actor.uri ? '_blank' : '' ;
+  if actor && actor.icon
     a.actor.actor-icon(href=actorLink, target=actorTarget, title=event.actor)
-      img(src=actors[event.actor].icon, alt=event.actor)
+      img(src=actor.icon, alt=event.actor)
   else if event.actor
     a.actor(href=actorLink, title=event.actor)
       != event.actor + ':'
@@ -101,7 +102,7 @@ mixin compactEventItem(event, width, indent, binaryClass)
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
                   title=event.title + ' by ' + event.actor + '\n\n' + event.description + extraDescription,
-                  class='actor-class-' + actors[event.actor].class,
+                  class='actor-class-' + (actors[event.actor] ? actors[event.actor].class : 'normal'),
                   class='event-class-' + event.class,
                   class='event-binary-' + (binaryClass || 'odd'))
     if indent
@@ -120,7 +121,7 @@ mixin archiveEventItem(event, width, indent, binaryClass)
                   data-event-type=event.type,
                   data-event-binary=binaryClass || 'odd',
                   title=event.title + ' by ' + event.actor + '\n\n' + event.description,
-                  class='actor-class-' + actors[event.actor].class,
+                  class='actor-class-' + (actors[event.actor] ? actors[event.actor].class : 'normal'),
                   class='event-class-' + event.class,
                   class='event-binary-' + (binaryClass || 'odd'))
     if indent
