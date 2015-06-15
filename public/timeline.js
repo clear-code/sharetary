@@ -36,8 +36,15 @@ jQuery.fn.reverse = [].reverse;
 
 function checkNewEvents() {
   var latestItem = $('.event-item').first();
-  var boundary = latestItem.attr('data-created-at');
-  var lastBinaryClass = latestItem.attr('data-event-binary');
+  var boundary, lastBinaryClass;
+  if (latestItem) {
+    boundary = latestItem.attr('data-created-at');
+    lastBinaryClass = latestItem.attr('data-event-binary');
+  }
+  else {
+    boundary = Math.floor(new Date().getTime()/ 1000);
+    lastBinaryClass = 'odd';
+  }
   var parameters = [
     'boundary=' + boundary,
     'lastBinaryClass=' + lastBinaryClass,
