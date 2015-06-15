@@ -146,3 +146,16 @@ This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14
     ~~~
     $ sudo service td-agent start
     ~~~
+
+## How to customize exporting columns in CSV?
+
+By default the link "CSV" in "Export" menu exports only some major columns.
+If you need, you can customize columns of exported records.
+Steps to change exporting columns are:
+
+ 1. Copy the link location of the menu item.
+ 2. Paste it to the location bar of your browser.
+ 3. Add new query parameter `columns` and load it.
+    * Any columns of the `Events` table can be specified, like: `...&columns=title`
+    * Multiple columns can be available as comma-separated list like: `...&columns=title,actor`
+    * Special column name `*` (or `all`) is available to export all columns of the `Events` table.
