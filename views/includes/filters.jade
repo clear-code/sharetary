@@ -17,15 +17,15 @@ mixin filtersDialog
             input(type='hidden', id='filter-actors', name='actors', value=filters.actors.join(','))
             input(type='hidden', id='filter-tags', name='tags', value=filters.tags.join(','))
             div#filter-actors-and-tags
+            input#filter-after(type='hidden', name='after', value=filters.after)
+            input#filter-before(type='hidden', name='before', value=filters.before)
             p#datetimepicker-after.input-group.date
               label.input-group-addon(for='filter-after-format') After (oldest timestamp)
-              input#filter-after(type='hidden', name='after', value=filters.after)
               input#filter-after-format.form-control(type='text', placeholder='YYYY-MM-DD hh:mm:ss')
               span.input-group-addon
                 span.glyphicon.glyphicon-calendar
             p#datetimepicker-before.input-group.date
               label.input-group-addon(for='filter-before-format') Before (latest timestamp)
-              input#filter-before(type='hidden', name='before', value=filters.before)
               input#filter-before-format.form-control(type='text', placeholder='YYYY-MM-DD hh:mm:ss')
               span.input-group-addon
                 span.glyphicon.glyphicon-calendar

@@ -72,13 +72,11 @@ function initDateTimePicker(prefix) {
     sideBySide:  true,
     showClear:   true,
     focusOnShow: true,
+    useCurrent:  false,
     defaultDate: defaultDate
   });
 
-  if (!isNaN(unixtime)) {
-    $('#filter-' + prefix).val(unixtime);
-    fillDatetimeFormatField(prefix);
-  }
+  fillDatetimeFormatField(prefix);
 
   var field = $('#filter-' + prefix + '-format');
   field.data('old-value', field.val());
