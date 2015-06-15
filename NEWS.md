@@ -13,6 +13,10 @@
    * A menu button is available in the navigation bar for narrow screens.
    * Timestamp filters can be applied more easily.
      You don't have to calculate UNIX time manually anymore.
+   * Datetime picker is now available to set target range filters.
+   * Errors around null response from the Groonga server are suppressed.
+ * Archive view
+   * Becomes exportable as CSV and JSON.
 
 ## 0.3.0: 2015-06-06
 
