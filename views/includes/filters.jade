@@ -20,32 +20,12 @@ mixin filtersDialog
             p.input-group
               != 'From '
               input#filter-after(type='hidden', name='after', value=filters.after)
-              input#filter-after-year(placeholder='YYYY', type='number', style='width:5em')
-              | -
-              input#filter-after-month(placeholder='MM', type='number', style='width:3em')
-              | -
-              input#filter-after-date(placeholder='DD', type='number', style='width:3em')
-              |  
-              input#filter-after-hour(placeholder='hh', type='number', style='width:3em')
-              | :
-              input#filter-after-minute(placeholder='mm', type='number', style='width:3em')
-              | :
-              input#filter-after-second(placeholder='ss', type='number', style='width:3em')
+              input#filter-after-format(placeholder='YYYY-MM-DD hh:mm:ss', style='width:15em')
               | (Oldest timestamp)
             p.input-group
               != ' To '
               input#filter-before(type='hidden', name='before', value=filters.before)
-              input#filter-before-year(placeholder='YYYY', type='number', style='width:5em')
-              | -
-              input#filter-before-month(placeholder='MM', type='number', style='width:3em')
-              | -
-              input#filter-before-date(placeholder='DD', type='number', style='width:3em')
-              |  
-              input#filter-before-hour(placeholder='hh', type='number', style='width:3em')
-              | :
-              input#filter-before-minute(placeholder='mm', type='number', style='width:3em')
-              | :
-              input#filter-before-second(placeholder='ss', type='number', style='width:3em')
+              input#filter-before-format(placeholder='YYYY-MM-DD hh:mm:ss', style='width:15em')
               | (Latest timestamp)
           .modal-footer
             .row
