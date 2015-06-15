@@ -2,6 +2,20 @@
 # Usage:
 #   $ npm run migrate-0.3.0-to-0.4.0 -h localhost -p 10041 -t "known-events"
 
+exist_command() {
+  type "$1" > /dev/null 2>&1
+}
+
+if ! exist_command curl; then
+  echo "ERROR: This migration script depends on the 'curl' command."
+  exit 1
+fi
+
+if ! exist_command jq; then
+  echo "ERROR: This migration script depends on the 'jq' command."
+  exit 1
+fi
+
 while getopts h:p:t:d OPT
 do
   case $OPT in
