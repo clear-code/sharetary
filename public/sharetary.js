@@ -16,7 +16,7 @@ function scrollToEvent(link) {
 }
 
 
-function fillDatetimeFields(prefix) {
+function fillDatetimeFormatField(prefix) {
   var filterValue = $('#filter-' + prefix).val();
   if (filterValue) {
     var date = new Date(parseInt(filterValue) * 1000);
@@ -39,12 +39,7 @@ function fillDatetimeFields(prefix) {
   }
 }
 
-updateFilterFromFields.timers = {};
 function updateFilterFromFields(prefix) {
-  if (updateFilterFromFields.timers[prefix])
-    window.clearTimeout(updateFilterFromFields.timers[prefix]);
-  updateFilterFromFields.timers[prefix] = window.setTimeout(function() {
-    delete updateFilterFromFields.timers[prefix];
     var formatDatetime = $('#filter-' + prefix + '-format').val();
     var parsed = formatDatetime.match(/^\s*(\d+)-(\d+)-(\d+)(?:\s*(\d+):(\d+):(\d+))?/);
     if (parsed) {
@@ -63,7 +58,38 @@ function updateFilterFromFields(prefix) {
     else {
       $('#filter-' + prefix).val('');
     }
-  }, 100);
+}
+
+function initDateTimePicker(prefix) {
+  var unixtime = parseInt($('#filter-' + prefix).val());
+  var defaultDate = null;
+  if (!isNaN(unixtime))
+    defaultDate = new Date(unixtime * 1000);
+
+  var picker = $('#datetimepicker-' + prefix);
+  picker.datetimepicker({
+    format:      'YYYY-MM-DD HH:mm:ss',
+    sideBySide:  true,
+    showClear:   true,
+    focusOnShow: true,
+    defaultDate: defaultDate
+  });
+
+  if (!isNaN(unixtime)) {
+    $('#filter-' + prefix).val(unixtime);
+    fillDatetimeFormatField(prefix);
+  }
+
+  var field = $('#filter-' + prefix + '-format');
+  field.data('old-value', field.val());
+  picker.bind('dp.change', function(event) {
+    if (field.data('old-value') != field.val())
+      updateFilterFromFields(prefix);
+  });
+  field.bind('propertychange change click keyup input paste', function(event) {
+    if (field.data('old-value') != field.val())
+      updateFilterFromFields(prefix);
+  });
 }
 
 function initActorsAndTagsCheckboxes() {
@@ -103,12 +129,13 @@ function initActorsAndTagsCheckboxes() {
   });
 }
 
-loadActorsAndTagsCheckboxes.fired = false;
-function loadActorsAndTagsCheckboxes() {
-  if (loadActorsAndTagsCheckboxes.fired)
+initFilters.fired = false;
+function initFilters() {
+  if (initFilters.fired)
     return;
 
-  loadActorsAndTagsCheckboxes.fired = true;
+  initFilters.fired = true;
+
   var parameters = [
     'actors=' + $('#filter-actors').val(),
     'tags=' + $('#filter-tags').val()
@@ -122,37 +149,13 @@ function loadActorsAndTagsCheckboxes() {
     checkboxes.animate({ height: 'show', opacity: 'show' }, 'normal');
     initActorsAndTagsCheckboxes();
   });
+
+  initDateTimePicker('after');
+  initDateTimePicker('before');
 }
 
 $(function() {
-  fillDatetimeFields('after');
-  fillDatetimeFields('before');
-
-  $('*[id^="filter-after-"]').each(function() {
-    var field = $(this);
-    field.data('old-value', field.val());
-    field.bind('propertychange change click keyup input paste dp.change', function(event) {
-      if (field.data('old-value') != field.val())
-        updateFilterFromFields('after');
-    });
-  });
-  $('*[id^="filter-before-"]').each(function() {
-    var field = $(this);
-    field.data('old-value', field.val());
-    field.bind('propertychange change click keyup input paste dp.change', function(event) {
-      if (field.data('old-value') != field.val())
-        updateFilterFromFields('before');
-    });
-  });
-
-  $('#filters').on('show.bs.modal', loadActorsAndTagsCheckboxes);
-
-  $('#datetimepicker-after').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm:ss'
-  });
-  $('#datetimepicker-before').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm:ss'
-  });
+  $('#filters').on('show.bs.modal', initFilters);
 
   var id = encodeURIComponent(location.hash.substr(1));
   if (id)
