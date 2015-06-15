@@ -1,6 +1,6 @@
 # News
 
-## 0.4.0: 2015-06-29 (planned)
+## 0.4.0: 2015-06-15
 
  * General
    * Local comments becomes disabled by default.
