@@ -18,6 +18,14 @@ nav.navbar.navbar-default.navbar-fixed-top
           a(href='/timeline' + (filters.queryParams ? '?' + filters.queryParams : '')) Timeline view
         li(class=classesForArchive)
           a(href='/archive' + (filters.queryParams ? '?' + filters.queryParams : '')) Archive view
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+            | Export
+            span.caret
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='/archive.csv' + (filters.queryParams ? '?' + filters.queryParams : '')) CSV
+              a(href='/archive.json' + (filters.queryParams ? '?' + filters.queryParams : '')) JSON
         if enableLocalComment
           li(class=classesForAdd)
             a(href='/add') Post
