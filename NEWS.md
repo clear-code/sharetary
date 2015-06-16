@@ -1,5 +1,10 @@
 # News
 
+## 0.5.0: 2015-06-16
+
+ * General
+   * Show actors and tags only for events matched to current search conditions.
+
 ## 0.4.0: 2015-06-15
 
  * General
