@@ -210,3 +210,9 @@ img.actor-icon {
 }
 */
 
+
+#filter-actors-fields,
+#filter-tags-fields {
+  max-height: 10em;
+  overflow: auto;
+}
