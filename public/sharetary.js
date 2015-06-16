@@ -104,6 +104,7 @@ function initFilters() {
 
   $.ajax({
     url: '/filters-actors?' + [
+      'searchTerm=' + $('#filter-searchTerm').val(),
       'tags=' + $('#filter-tags').val(),
       'after=' + $('#filter-after').val(),
       'before=' + $('#filter-before').val()
@@ -131,6 +132,7 @@ function initFilters() {
 
   $.ajax({
     url: '/filters-tags?' + [
+      'searchTerm=' + $('#filter-searchTerm').val(),
       'actors=' + $('#filter-actors').val(),
       'after=' + $('#filter-after').val(),
       'before=' + $('#filter-before').val()
