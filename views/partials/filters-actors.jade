@@ -1,0 +1,13 @@
+each actor in actors
+  span(style='white-space: nowrap; vertical-align: middle')
+    input(type='checkbox',
+          id='filter-actors-item-' + escape(actor._key),
+          checked=(filters.actors.indexOf(actor._key) > -1)
+          data-actor=actor._key)
+    label(for='filter-actors-item-' + escape(actor._key))
+      if actor.icon
+        img.actor-icon(src=actor.icon, alt='')
+      else
+        span.glyphicon.glyphicon-user(aria-hidden='true')
+      != actor._key + '(' + actor._nsubrecs + ')'
+  |  

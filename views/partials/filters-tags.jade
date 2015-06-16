@@ -1,0 +1,13 @@
+each tag in tags
+  span(style='white-space: nowrap; vertical-align: middle')
+    input(type='checkbox',
+          id='filter-tags-item-' + escape(tag._key),
+          checked=(filters.tags.indexOf(tag._key) > -1)
+          data-tag=tag._key)
+    label(for='filter-tags-item-' + escape(tag._key))
+      if tag.icon
+        img.tag-icon(src=tag.icon, alt='')
+      else
+        span.glyphicon.glyphicon-tag(aria-hidden='true')
+      != tag._key + '(' + tag._nsubrecs + ')'
+  |  

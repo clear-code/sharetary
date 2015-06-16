@@ -90,41 +90,9 @@ function initDateTimePicker(prefix) {
   });
 }
 
-function initActorsAndTagsCheckboxes() {
-  function getValues(selector) {
-    var actors = ($(selector).prop('value') || '').trim();
-    return actors ? actors.split(/\s*,\s*/) : [] ;
-  }
-
-  var actors = getValues('#filter-actors');
-  $('*[id^="filter-actors-item-"]').each(function() {
-    var checkbox = $(this);
-    var actor = checkbox.attr('data-actor');
-    checkbox.prop('checked', actors.indexOf(actor) > -1);
-    checkbox.bind('propertychange change click keyup', function(event) {
-      var actors = getValues('#filter-actors').filter(function(oneActor) {
-        return oneActor != actor;
-      });
-      if (checkbox.prop('checked'))
-        actors.push(actor);
-      $('#filter-actors').val(actors.join(','));
-    });
-  });
-
-  var tags = getValues('#filter-tags');
-  $('*[id^="filter-tags-item-"]').each(function() {
-    var checkbox = $(this);
-    var tag = checkbox.attr('data-tag');
-    checkbox.prop('checked', tags.indexOf(tag) > -1);
-    checkbox.bind('propertychange change click keyup', function(event) {
-      var tags = getValues('#filter-tags').filter(function(oneTag) {
-        return oneTag != tag;
-      });
-      if (checkbox.prop('checked'))
-        tags.push(tag);
-      $('#filter-tags').val(tags.join(','));
-    });
-  });
+function getValues(selector) {
+  var actors = ($(selector).prop('value') || '').trim();
+  return actors ? actors.split(/\s*,\s*/) : [] ;
 }
 
 initFilters.fired = false;
@@ -134,18 +102,58 @@ function initFilters() {
 
   initFilters.fired = true;
 
-  var parameters = [
-    'actors=' + $('#filter-actors').val(),
-    'tags=' + $('#filter-tags').val()
-  ];
   $.ajax({
-    url: '/filters-actors-and-tags?' + parameters.join('&')
+    url: '/filters-actors?' + [
+      'tags=' + $('#filter-tags').val(),
+      'after=' + $('#filter-after').val(),
+      'before=' + $('#filter-before').val()
+    ].join('&')
   }).done(function(data) {
     var checkboxes = $(data);
     checkboxes.css({ height: 'hidden', opacity: 'hidden' });
-    $('#filter-actors-and-tags').append(checkboxes);
+    $('#filter-actors-fields').append(checkboxes);
     checkboxes.animate({ height: 'show', opacity: 'show' }, 'normal');
-    initActorsAndTagsCheckboxes();
+    var actors = getValues('#filter-actors');
+    $('*[id^="filter-actors-item-"]').each(function() {
+      var checkbox = $(this);
+      var actor = checkbox.attr('data-actor');
+      checkbox.prop('checked', actors.indexOf(actor) > -1);
+      checkbox.bind('propertychange change click keyup', function(event) {
+        var actors = getValues('#filter-actors').filter(function(oneActor) {
+          return oneActor != actor;
+        });
+        if (checkbox.prop('checked'))
+          actors.push(actor);
+        $('#filter-actors').val(actors.join(','));
+      });
+    });
+  });
+
+  $.ajax({
+    url: '/filters-tags?' + [
+      'actors=' + $('#filter-actors').val(),
+      'after=' + $('#filter-after').val(),
+      'before=' + $('#filter-before').val()
+    ].join('&')
+  }).done(function(data) {
+    var checkboxes = $(data);
+    checkboxes.css({ height: 'hidden', opacity: 'hidden' });
+    $('#filter-tags-fields').append(checkboxes);
+    checkboxes.animate({ height: 'show', opacity: 'show' }, 'normal');
+    var tags = getValues('#filter-tags');
+    $('*[id^="filter-tags-item-"]').each(function() {
+      var checkbox = $(this);
+      var tag = checkbox.attr('data-tag');
+      checkbox.prop('checked', tags.indexOf(tag) > -1);
+      checkbox.bind('propertychange change click keyup', function(event) {
+        var tags = getValues('#filter-tags').filter(function(oneTag) {
+          return oneTag != tag;
+        });
+        if (checkbox.prop('checked'))
+          tags.push(tag);
+        $('#filter-tags').val(tags.join(','));
+      });
+    });
   });
 
   initDateTimePicker('after');

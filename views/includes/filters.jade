@@ -14,9 +14,28 @@ mixin filtersDialog
             p.input-group
               label.input-group-addon(for='filter-searchTerm') Keywords
               input#filter-searchTerm.form-control(name='searchTerm', value=filters.searchTerm || '', placeholder='Terms to be searched')
-            input(type='hidden', id='filter-actors', name='actors', value=filters.actors.join(','))
-            input(type='hidden', id='filter-tags', name='tags', value=filters.tags.join(','))
-            div#filter-actors-and-tags
+            div.panel.panel-default
+              div.panel-heading(role='tab')
+                h3.panel-title
+                  a#filter-actors-container-toggler(data-toggle='collapse',
+                                                    href='#filter-actors-container',
+                                                    aria-controls='filter-actors-container')
+                    | Actors
+              div#filter-actors-container.panel-collapse.collapse(role='tabpanel',
+                                                                  aria-labelledby='filter-actors-container-toggler')
+                div.panel-body#filter-actors-fields
+                  input(type='hidden', id='filter-actors', name='actors', value=filters.actors.join(','))
+            div.panel.panel-default
+              div.panel-heading(role='tab')
+                h3.panel-title
+                  a#filter-tags-container-toggler(data-toggle='collapse',
+                                                  href='#filter-tags-container',
+                                                  aria-controls='filter-tags-container')
+                    | Tags
+              div#filter-tags-container.panel-collapse.collapse(role='tabpanel',
+                                                                aria-labelledby='filter-tags-container-toggler')
+                div.panel-body#filter-tags-fields
+                  input(type='hidden', id='filter-tags', name='tags', value=filters.tags.join(','))
             input#filter-after(type='hidden', name='after', value=filters.after)
             input#filter-before(type='hidden', name='before', value=filters.before)
             p#datetimepicker-after.input-group.date
