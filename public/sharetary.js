@@ -95,12 +95,12 @@ function getValues(selector) {
   return actors ? actors.split(/\s*,\s*/) : [] ;
 }
 
-initFilters.fired = false;
-function initFilters() {
-  if (initFilters.fired)
+initActorsFilters.fired = false;
+function initActorsFilters() {
+  if (initActorsFilters.fired)
     return;
 
-  initFilters.fired = true;
+  initActorsFilters.fired = true;
 
   $.ajax({
     url: '/filters-actors?' + [
@@ -129,6 +129,14 @@ function initFilters() {
       });
     });
   });
+}
+
+initTagsFilters.fired = false;
+function initTagsFilters() {
+  if (initTagsFilters.fired)
+    return;
+
+  initTagsFilters.fired = true;
 
   $.ajax({
     url: '/filters-tags?' + [
@@ -157,13 +165,15 @@ function initFilters() {
       });
     });
   });
-
-  initDateTimePicker('after');
-  initDateTimePicker('before');
 }
 
 $(function() {
-  $('#filters').on('show.bs.modal', initFilters);
+  $('#filter-actors-container').on('show.bs.collapse', initActorsFilters);
+  $('#filter-tags-container').on('show.bs.collapse', initTagsFilters);
+  $('#filters').on('show.bs.modal', function() {
+    initDateTimePicker('after');
+    initDateTimePicker('before');
+  });
 
   var id = encodeURIComponent(location.hash.substr(1));
   if (id)
