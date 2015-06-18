@@ -79,6 +79,9 @@ function checkNewEvents() {
 
       setTimeout(checkNewEvents, refreshInterval * 1000);
     }, 0);
+  }).fail(function(data) {
+    console.log('Failed to check new events. Retrying...');
+    setTimeout(checkNewEvents, refreshInterval * 1000);
   });
 }
 checkNewEvents();
