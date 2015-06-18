@@ -124,8 +124,8 @@ This section describes how to crawl GitHub activities by fluentd, on a Ubuntu 14
     
     ~~~
     $ sudo td-agent-gem install fluent-plugin-github-activities
-    $ sudo td-agent-gem install fluent-plugin-map
     $ sudo td-agent-gem install fluent-plugin-record-reformer
+    $ sudo td-agent-gem install fluent-plugin-filter_typecast
     ~~~
  4. Install fluent-plugin-groonga. It requires some extra packages.
     
